@@ -11,17 +11,21 @@ export default{
         URI: 'http://127.0.0.1:8000/',
         APIPath: 'api/developers',
         developers: [],
+        skills: [],
+        selectedSkill: '',
       };
   },
   components: { AppDevelopers }, 
 
   methods: {
   getDevelopers(){
-    axios.get(this.URI+this.APIPath).then(response => {
+      axios.get(this.URI + this.APIPath + '?skill_id=' + this.selectedSkill ).then(response => {
       console.log(response.data.results);
       this.developers = response.data.results;
+      this.skills = response.data.allSkills;
     });
-  }
+  },
+
   }, 
   created(){
     this.getDevelopers();
@@ -30,6 +34,18 @@ export default{
 </script>
 <template>
   <div class="container my-2">
+
+    <form @submit.prevent="" action="" class="d-flex">
+      <label for="exampleDataList" class="form-label">Datalist example</label>
+      <input v-model="this.selectedSkill" class="form-control" list="datalistOptions" id="exampleDataList" @change="getDevelopers()" placeholder="Type to search...">
+      <datalist id="datalistOptions">
+        <option value="">Tutte</option>
+        <option v-for="skill in this.skills " :value="skill.id">{{ skill.name }}</option>
+      </datalist>
+      
+      <button type="submit">CERCA</button>
+
+    </form>
     <h1>Tutti gli sviluppatori</h1>
     <div class="container all-developers">
       <AppDevelopers v-for="developer in this.developers" :developers="developer"></AppDevelopers>

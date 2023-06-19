@@ -9,6 +9,7 @@ export default{
   props: {
     developers: Object,
   },
+
   computed: {
     // leggo l'immagine di copertina
     picture(){
