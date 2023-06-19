@@ -43,8 +43,9 @@ export default{
 </script>
 <template>
   <div class="container my-2">
+    <h1>Tutti gli sviluppatori</h1>
 
-    <form id="search" @submit.prevent="" action="" >
+    <form id="search" @submit.prevent="" action="">
       <label for="skillInput" class="form-label">Ricerca per specializzazione</label>
       <input v-model="this.selectedSkill" class="form-control" list="skillList" id="skillInput" @change="getDevelopers()" placeholder="Nome Specializzazione...">
       <datalist id="skillList">
@@ -55,8 +56,8 @@ export default{
       <button type="submit" class="btn btn-primary">CERCA</button>
 
     </form>
-    <h1>Tutti gli sviluppatori</h1>
     
+
     <div v-if="this.isDeveloperFound" class="results">
       <h3 v-if="this.params == 'Tutte le specializzazioni'">{{ this.params }}</h3>
       <h3 v-else>Risultati per la ricerca: {{ this.params }}</h3>
@@ -79,7 +80,17 @@ export default{
 
 #search{
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 1em;
+  // flex
+
+  padding: 2em 0;
+
+  .form-label{
+    margin: 0;
+    min-width: fit-content;
+  }
 
 }
 </style>
