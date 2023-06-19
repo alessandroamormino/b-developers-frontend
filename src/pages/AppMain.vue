@@ -44,20 +44,23 @@ export default{
 <template>
   <div class="container my-2">
 
-    <form @submit.prevent="" action="" class="d-flex">
-      <label for="exampleDataList" class="form-label">Datalist example</label>
-      <input v-model="this.selectedSkill" class="form-control" list="datalistOptions" id="exampleDataList" @change="getDevelopers()" placeholder="Type to search...">
-      <datalist id="datalistOptions">
+    <form id="search" @submit.prevent="" action="" >
+      <label for="skillInput" class="form-label">Ricerca per specializzazione</label>
+      <input v-model="this.selectedSkill" class="form-control" list="skillList" id="skillInput" @change="getDevelopers()" placeholder="Nome Specializzazione...">
+      <datalist id="skillList">
         <option value="">Tutte</option>
         <option v-for="skill in this.skills " :value="skill.name">{{ skill.name }}</option>
       </datalist>
       
-      <button type="submit">CERCA</button>
+      <button type="submit" class="btn btn-primary">CERCA</button>
 
     </form>
     <h1>Tutti gli sviluppatori</h1>
-    <h3 v-if="this.params == 'Tutte le specializzazioni'">{{ this.params }}</h3>
-    <h3 v-else>Risultati per la ricerca: {{ this.params }}</h3>
+    
+    <div v-if="this.isDeveloperFound" class="results">
+      <h3 v-if="this.params == 'Tutte le specializzazioni'">{{ this.params }}</h3>
+      <h3 v-else>Risultati per la ricerca: {{ this.params }}</h3>
+    </div>
 
     <div v-if="this.isDeveloperFound" class="container all-developers">
       <AppDevelopers v-for="developer in this.developers" :developers="developer"></AppDevelopers>
@@ -72,5 +75,11 @@ export default{
   display: flex;
   flex-flow: row wrap;
   gap: 2em;
+}
+
+#search{
+  display: flex;
+  gap: 1em;
+
 }
 </style>
