@@ -42,5 +42,11 @@ export default{
     object-fit: cover;
     object-position: top;
   }
+  .card-body{
+    h5 {
+      margin-top: 1em;
+      text-transform: capitalize;
+    }
+  }
 }
 </style>
