@@ -21,7 +21,7 @@ export default{
 
   methods: {
   getDevelopers(){
-    axios.get(this.URI + this.APIPath + '?skill_name=' + this.selectedSkill ).then(response => {
+    axios.get(this.URI + this.APIPath + '?skill_id=' + this.selectedSkill ).then(response => {
       console.log(response.data);
       if(response.data.success) {
         this.developers = response.data.results;
@@ -46,14 +46,20 @@ export default{
     <h1>Tutti gli sviluppatori</h1>
 
     <form id="search" @submit.prevent="" action="">
-      <label for="skillInput" class="form-label">Ricerca per specializzazione</label>
+      <!-- <label for="skillInput" class="form-label">Ricerca per specializzazione</label>
       <input v-model="this.selectedSkill" class="form-control" list="skillList" id="skillInput" @change="getDevelopers()" placeholder="Nome Specializzazione...">
       <datalist id="skillList">
         <option value="">Tutte</option>
         <option v-for="skill in this.skills " :value="skill.name">{{ skill.name }}</option>
-      </datalist>
+      </datalist> -->
+
+      <label>Ricerca per specializzazione</label>
+      <select v-model="this.selectedSkill" id="skill_id" name="skill_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
+        <option selected value="">Scegli specializzazione</option>
+        <option v-for="skill in this.skills" :value="skill.id">{{ skill.name }}</option>
+      </select>
       
-      <button type="submit" class="btn btn-primary">CERCA</button>
+      <button type="submit" class="btn btn-primary" @click="getDevelopers()">CERCA</button>
 
     </form>
     
