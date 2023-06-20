@@ -64,11 +64,6 @@ export default{
     </form>
     
 
-    <div v-if="this.isDeveloperFound" class="results">
-      <h3 v-if="this.params == 'Tutte le specializzazioni'">{{ this.params }}</h3>
-      <h3 v-else>Risultati per la ricerca: {{ this.params }}</h3>
-    </div>
-
     <div v-if="this.isDeveloperFound" class="container all-developers">
       <AppDevelopers v-for="developer in this.developers" :developers="developer"></AppDevelopers>
     </div>
