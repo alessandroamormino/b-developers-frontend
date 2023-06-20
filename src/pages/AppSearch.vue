@@ -3,7 +3,6 @@
 import axios from 'axios';
 import {store} from '../store.js';
 
-
 import AppDevelopers from '../components/AppDevelopers.vue';
 
 export default{
@@ -12,20 +11,22 @@ export default{
       return {
         developers: [],
         skills: [],
+        selectedSkill: '',
         isDeveloperFound: false,
         store,
-
       };
+
   },
   components: { AppDevelopers }, 
 
   methods: {
   getDevelopers(){
 
-    axios.get(this.store.apiURLsearch).then(response => {
-      
+
+    axios.get(this.store.apiURLsearch + this.store.selectedSkill).then(response => {
+
       console.log(response.data);
-      
+
       if(response.data.success) {
         this.developers = response.data.results;
         this.skills = response.data.allSkills;
@@ -35,17 +36,20 @@ export default{
       }
 
     });
+
+    
   },
 
   getSkillName(){
     for (let i = 0; i < this.skills.length; i++) {
         
-      if(this.skills[i].id == this.store.selectedSkill){
+        if(this.skills[i].id == this.store.selectedSkill){
 
-        this.store.skillName =  this.skills[i].name;        
-      }
+            this.store.skillName =  this.skills[i].name;        
+        }
     }
 
+    // this.store.selectedSkill = '';
   },
 
   }, 
@@ -59,22 +63,18 @@ export default{
     <h1>Tutti gli sviluppatori</h1>
 
     <form id="search" @submit.prevent="" action="">
-      <!-- <label for="skillInput" class="form-label">Ricerca per specializzazione</label>
-      <input v-model="this.selectedSkill" class="form-control" list="skillList" id="skillInput" @change="getDevelopers()" placeholder="Nome Specializzazione...">
-      <datalist id="skillList">
-        <option value="">Tutte</option>
-        <option v-for="skill in this.skills " :value="skill.name">{{ skill.name }}</option>
-      </datalist> -->
 
       <label>Ricerca per specializzazione</label>
       <select v-model="this.store.selectedSkill" id="skill_id" name="skill_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
-        <option selected value="">Tutte le specializzazioni</option>
+        <option value="">Tutte le specializzazioni</option>
         <option v-for="skill in this.skills" :value="skill.id">{{ skill.name }}</option>
       </select>
       
-      <router-link :to="{name:'search' }" type="submit" class="btn btn-primary" @click="this.getSkillName()">CERCA</router-link>
+      <button type="submit" class="btn btn-primary" @click="getDevelopers(), this.getSkillName()">CERCA</button>
 
     </form>
+
+    <span>Risultati per ricerca: {{ this.store.skillName }}</span>
     
 
     <div v-if="this.isDeveloperFound" class="container all-developers">
@@ -85,6 +85,8 @@ export default{
     </div>
   </div>
 </template>
+
+
 <style lang="scss" scoped>
 .all-developers{
   display: flex;
