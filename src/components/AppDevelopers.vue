@@ -1,9 +1,13 @@
 <script>
+import {store} from '../store.js';
+
+
 export default{
   name: 'AppDevelopers',
   data(){
     return{
-      URI: 'http://127.0.0.1:8000/',
+      store,
+      icons:[],
     }
   }, 
   props: {
@@ -13,9 +17,24 @@ export default{
   computed: {
     // leggo l'immagine di copertina
     picture(){
-      return this.URI + 'storage/' + this.developers.picture;
+      return this.store.URI + 'storage/' + this.developers.picture;
+    },
+
+    getSkillsIcons(){
+      this.icons = [];
+
+    for (let i = 0; i < this.developers.skills.length; i++) {
+      this.icons.push(this.developers.skills[i].icon);
+      
+
     }
+    return this.icons;
+  }
+
+    
   }, 
+
+  
 }
 </script>
 <template>
@@ -29,6 +48,11 @@ export default{
         <div class="phone mt-1"><strong>Telefono: </strong>{{developers.phone}}</div>
         <div class="role mt-1"><strong>Titolo: </strong>{{developers.role}}</div>
         <div class="services mt-1"><strong>Prestazioni: </strong>{{developers.services}}</div>
+      </div>
+
+      <hr>
+      <div class="icons">
+        <img class="skill-icon" v-for="icon in getSkillsIcons" :src="this.store.URI + 'storage/' + icon" alt="">
       </div>
     </div>
   </div>
@@ -46,6 +70,27 @@ export default{
     h5 {
       margin-top: 1em;
       text-transform: capitalize;
+    }
+  }
+
+  .icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    min-height: 100px;
+    width: 80%;
+    margin: 0 auto;
+
+    padding: 10px;
+
+    .skill-icon{
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+
     }
   }
 }

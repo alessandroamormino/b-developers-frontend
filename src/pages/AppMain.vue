@@ -24,8 +24,6 @@ export default{
 
     axios.get(this.store.apiURLsearch).then(response => {
       
-      console.log(response.data);
-      
       if(response.data.success) {
         this.developers = response.data.results;
         this.skills = response.data.allSkills;

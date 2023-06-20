@@ -25,10 +25,9 @@ export default{
 
     axios.get(this.store.apiURLsearch + this.store.selectedSkill).then(response => {
 
-      console.log(response.data);
-
       if(response.data.success) {
         this.developers = response.data.results;
+        console.log(this.developers);
         this.skills = response.data.allSkills;
         this.isDeveloperFound = true;
       } else {
@@ -49,7 +48,6 @@ export default{
         }
     }
 
-    // this.store.selectedSkill = '';
   },
 
   }, 
