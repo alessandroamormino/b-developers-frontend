@@ -42,22 +42,30 @@ export default{
 
     // funzioni per il calcolo delle stelle per i voti 
     getRatingAVG() {
-      let sum = 0; 
-      for(let i=0; i < this.developers.ratings.length; i++){
-        sum += this.developers.ratings[i].rating; 
-      }
-       return this.ratingAVG = sum / this.developers.ratings.length;
+      // let sum = 0; 
+      // for(let i=0; i < this.developers.ratings.length; i++){
+      //   sum += this.developers.ratings[i].rating; 
+      // }
+      // console.log(this.developers);
+      // if(this.developers.ratings.length == 0){
+      //   return this.ratingAVG = 0;
+      // }
+      // return this.ratingAVG = sum / this.developers.ratings.length;
+      this.ratingAVG = this.developers.ratingAVG;
     },
 
     getFullStars(avg) {
+      // console.log('full - ', this.developers.last_name, Math.floor(avg));
       return this.fullStar = Math.floor(avg);
     },
 
     getHalfStars(avg) {
-      return this.halfStars = Math.floor(avg * 2) / 2 - this.getFullStars(avg);
+      // console.log('half - ', this.developers.last_name, Math.round(Math.round(avg * 2) / 2 - this.getFullStars(avg)));
+      return this.halfStars = Math.round(Math.floor(avg * 2) / 2 - this.getFullStars(avg));
     },
 
     getRemainingStars(avg) {
+      // console.log('ramaining - ', this.developers.last_name, 5 - (this.getFullStars(avg) + Math.round(this.getHalfStars(avg))));
       return this.remainingStars = 5 - (this.getFullStars(avg) + Math.round(this.getHalfStars(avg)));
     },
 
@@ -66,7 +74,11 @@ export default{
 
   },
   
-  created() {
+  mounted() {
+    this.getRatingAVG();
+  }, 
+
+  updated(){
     this.getRatingAVG();
   }
   

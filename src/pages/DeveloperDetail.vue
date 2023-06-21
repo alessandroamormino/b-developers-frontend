@@ -23,7 +23,6 @@ export default{
   methods: {
     getDevelopers() {
         axios.get(this.store.URI + this.store.APIPath + '/' + this.developerSlug).then(response => {
-
             if(response.data.developer) {
                 this.isDeveloperFound = true;
                 this.developer = response.data.developer;
@@ -35,11 +34,12 @@ export default{
     },
 
     getRatingAVG() {
-      let sum = 0; 
-      for(let i=0; i < this.developer.ratings.length; i++){
-        sum += this.developer.ratings[i].rating; 
-      }
-       return this.ratingAVG = sum / this.developer.ratings.length;
+      // let sum = 0; 
+      // for(let i=0; i < this.developer.ratings.length; i++){
+      //   sum += this.developer.ratings[i].rating; 
+      // }
+      //  return this.ratingAVG = sum / this.developer.ratings.length;
+      this.ratingAVG = this.developer.ratingAVG;
     },
 
     getFullStars(avg) {
@@ -47,17 +47,16 @@ export default{
     },
 
     getHalfStars(avg) {
-      return this.halfStars = Math.floor(avg * 2) / 2 - this.getFullStars(avg);
+      // return this.halfStars = Math.round(avg) - this.getFullStars(avg);
+      return this.halfStars = Math.round(Math.floor(avg * 2) / 2 - this.getFullStars(avg));
     },
 
     getRemainingStars(avg) {
       return this.remainingStars = 5 - (this.getFullStars(avg) + Math.round(this.getHalfStars(avg)));
     },
 
-},
-
-  mounted() {
   },
+
 
   created() {
     this.developerSlug = this.$route.params.slug;

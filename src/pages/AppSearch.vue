@@ -26,7 +26,7 @@ export default{
     axios.get(this.store.apiURLsearch + this.store.selectedSkill + '&avg=' + this.selectedAVG).then(response => {
       if(response.data.success) {
         this.developers = response.data.results;
-        console.log(this.developers);
+        // console.log(this.developers);
         this.skills = response.data.allSkills;
         this.isDeveloperFound = true;
       } else {
