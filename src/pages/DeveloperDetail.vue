@@ -16,6 +16,9 @@ export default{
         fullStars: '',
         halfStars: '',
         remainingStars: '',
+        revName: '',
+        revRate: '',
+        revContent: '',
       };
 
   },
@@ -55,7 +58,81 @@ export default{
       return this.remainingStars = 5 - (this.getFullStars(avg) + Math.round(this.getHalfStars(avg)));
     },
 
+    // Invio la recensione
+    // sendReview(){
+    //   axios.post(this.store.URI + 'reviews', {
+    //     name: this.revName,
+    //     comment: this.revContent,
+    //   },{
+    //     headers: {
+    //       'Access-Control-Allow-Origin': 'http://127.0.0.1:8000/',
+    //       'Content-Type': 'application/json',
+    //     },
+    //   });
+
+    //   axios.post(this.store.URI + 'ratings', {
+    //     rating: this.revRate,
+    //   },{
+    //     headers: {
+    //       'Access-Control-Allow-Origin': 'http://127.0.0.1:8000/',
+    //       'Content-Type': 'application/json',
+    //     },
+    //   });
+    // },
+    sendReview() {
+      const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+      axios.post(
+        this.store.URI + 'reviews',
+        {
+          name: this.revName,
+          comment: this.revContent,
+        },
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'X-CSRF-TOKEN': csrfToken,
+          },
+        }
+      )
+      .then(response => {
+        // Gestisci la risposta della richiesta POST qui
+      })
+      .catch(error => {
+        // Gestisci gli errori qui
+      });
+
+      axios.post(
+        this.store.URI + 'ratings',
+        {
+          rating: this.revRate,
+        },
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'X-CSRF-TOKEN': csrfToken,
+          },
+        }
+      )
+      .then(response => {
+        // Gestisci la risposta della richiesta POST qui
+      })
+      .catch(error => {
+        // Gestisci gli errori qui
+      });
+    }
+
   },
+
+  // mounted() {
+  //   const csrfToken = document.querySelector('meta[name="csrf-token"]');
+  //   if (csrfToken) {
+  //     const token = csrfToken.getAttribute('content');
+  //     // Utilizza il token CSRF come necessario
+  //   } else {
+  //     console.error('Il token CSRF non è presente nel documento.');
+  //   }
+  // },
 
 
   created() {
@@ -110,10 +187,30 @@ export default{
             <strong>Curriculum</strong>
             <img id="dev-curriculum" :src="getDevCV" alt="developer-cv">
         </div>
-
         <div v-else class="alert alert-warning">
             <p>Lo sviluppatore non è stato trovato</p>
         </div>
+        <hr>
+
+        <div class="reviews-form">
+          <h4>Lascia una tua recensione</h4>
+          <form @submit.prevent="sendReview()" method="POST">
+            <div class="info-user">
+              <label for="name">Inserisci il tuo nome completo</label>
+              <input type="text" id="name" name="name" v-model="this.revName">
+            </div>
+            <div class="ratings">
+              <label for="rating">Dai un voto da 1 a 5</label>
+              <input type="number" min="1" max="5" v-model="this.revRate">
+            </div>
+            <div class="content">
+              <label for="content">Inserisci il tuo commento</label>
+              <textarea name="content" id="content" cols="30" rows="10" v-model="this.revContent"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Invia</button>
+          </form>
+        </div>
+
     </div>
 
    
@@ -138,7 +235,8 @@ export default{
 }
 
 #dev-curriculum {
-    display: block;
+  width: 350px;
+  display: block;
 }
   .icons{
     display: flex;
@@ -168,6 +266,10 @@ export default{
     .fa-regular.fa-star {
       color: rgb(180, 179, 179);
     }
+  }
+
+  .reviews-form {
+    margin: 2em 0;
   }
 
 </style>
