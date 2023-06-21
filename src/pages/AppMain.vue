@@ -6,6 +6,7 @@ import {store} from '../store.js';
 
 import AppDevelopers from '../components/AppDevelopers.vue';
 
+import AppHeader from '../components/AppHeader.vue';
 export default{
   name: "AppMain",
   data() {
@@ -17,7 +18,7 @@ export default{
 
       };
   },
-  components: { AppDevelopers }, 
+  components: { AppDevelopers, AppHeader }, 
 
   methods: {
   getDevelopers(){
@@ -55,7 +56,8 @@ export default{
 }
 </script>
 <template>
-  <div class="container my-2">
+  <AppHeader></AppHeader>
+  <div class="container my-4">
     <h1>Tutti gli sviluppatori</h1>
 
     <form id="search" @submit.prevent="" action="">

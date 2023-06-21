@@ -7,7 +7,7 @@ export default {
 
     }
   }, 
-  components: {AppNav}
+  components: { AppNav }
 }
 </script>
 

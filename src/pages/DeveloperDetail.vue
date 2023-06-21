@@ -123,25 +123,29 @@ export default{
 </script>
 <template>
     <div class="container">
-        <h1 class="text-center py-5">Dettagli</h1>
+        <h1 class="py-5">Dettagli Sviluppatore</h1>
 
         <div v-if="this.isDeveloperFound" class="developer-detail">
             <h3 class="mb-3">{{ this.developer.user.name }} {{ this.developer.last_name }}</h3>
+            <img id="dev-picture" :src="getDevPicture" alt="developer-img">
             <div v-if="this.developer.ratings.length > 0" class="stars">
                 <i v-for="star in this.getFullStars(this.ratingAVG)" class="fa-solid fa-star"></i><i v-for="halfStar in this.getHalfStars(this.ratingAVG)" class="fa-solid fa-star-half-stroke"></i><i v-for="star in this.getRemainingStars(this.ratingAVG)" class="fa-regular fa-star "></i> <span> ( {{ this.developer.ratings.length}} )</span>
             </div>
-            <img id="dev-picture" :src="getDevPicture" alt="developer-img">
-            <p>Indirizzo: {{ this.developer.address }}</p>
-            <p>Telefono: {{ this.developer.phone }}</p>
-            <strong>Titolo: {{ this.developer.role }}</strong>
-            <p>Prestazioni: {{ this.developer.services }}</p>
             <hr>
-            <strong>Specializzazioni</strong>
+            <div class="info">
+              <h4>Informazioni</h4>
+              <p><strong>Indirizzo:</strong> {{ this.developer.address }}</p>
+              <p><strong>Telefono:</strong> {{ this.developer.phone }}</p>
+              <p><strong>Titolo:</strong> {{ this.developer.role }}</p>
+              <p><strong>Prestazioni:</strong> {{ this.developer.services }}</p>
+            </div>
+            <hr>
+            <h4>Specializzazioni</h4>
             <div class="icons">
                 <img class="skill-icon" v-for="icon in getSkillsIcons" :src="this.store.URI + 'storage/' + icon" alt="">
             </div>
             <hr>
-            <strong>Curriculum</strong>
+            <h4>Curriculum</h4>
             <img id="dev-curriculum" :src="getDevCV" alt="developer-cv">
         </div>
         <div v-else class="alert alert-warning">
@@ -152,17 +156,17 @@ export default{
         <div class="reviews-form">
           <h4>Lascia una tua recensione</h4>
           <form @submit.prevent="sendReview()" method="POST">
-            <div class="info-user">
-              <label for="name">Inserisci il tuo nome completo</label>
-              <input type="text" id="name" name="name" v-model="this.revName">
+            <div class="mb-3 info-user">
+              <label for="name" class="form-label">Inserisci il tuo nome completo</label>
+              <input type="text" id="name" name="name" v-model="this.revName" class="form-control">
             </div>
-            <div class="ratings">
-              <label for="rating">Dai un voto da 1 a 5</label>
-              <input type="number" min="1" max="5" v-model="this.revRate">
+            <div class="mb-3 ratings">
+              <label for="rating" class="form-label">Dai un voto da 1 a 5</label>
+              <input type="number" min="1" max="5" v-model="this.revRate" class="form-control">
             </div>
-            <div class="content">
-              <label for="content">Inserisci il tuo commento</label>
-              <textarea name="content" id="content" cols="30" rows="10" v-model="this.revContent"></textarea>
+            <div class="mb-3 content">
+              <label for="content" class="form-label">Inserisci il tuo commento</label>
+              <textarea name="content" id="content" cols="30" rows="10" v-model="this.revContent" class="form-control"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Invia</button>
           </form>
@@ -179,6 +183,11 @@ export default{
 .developer-detail {
     h3 {
         text-transform: capitalize;
+    }
+    .info{
+      h4{
+        margin-bottom: 1em;
+      }
     }
 }
 
