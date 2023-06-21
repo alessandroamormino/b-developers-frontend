@@ -15,6 +15,7 @@ export default{
         selectedAVG: '',
         isDeveloperFound: false,
         store,
+        selectedRevs: '',
       };
 
   },
@@ -23,10 +24,9 @@ export default{
   methods: {
   getDevelopers(){
 
-    axios.get(this.store.apiURLsearch + this.store.selectedSkill + '&avg=' + this.selectedAVG).then(response => {
+    axios.get(this.store.apiURLsearch + this.store.selectedSkill + '&avg=' + this.selectedAVG + '&numRevs=' + this.selectedRevs).then(response => {
       if(response.data.success) {
         this.developers = response.data.results;
-        // console.log(this.developers);
         this.skills = response.data.allSkills;
         this.isDeveloperFound = true;
       } else {
@@ -58,15 +58,27 @@ export default{
 
     <form id="search" @submit.prevent="" action="">
 
-      <label>Ricerca per specializzazione</label>
-      <select v-model="this.store.selectedSkill" id="skill_id" name="skill_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
-        <option value="">Tutte le specializzazioni</option>
-        <option v-for="skill in this.skills" :value="skill.id">{{ skill.name }}</option>
-      </select>
+      <div class="skills">
+        <label>Ricerca per specializzazione</label>
+        <select v-model="this.store.selectedSkill" id="skill_id" name="skill_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
+          <option value="">Tutte le specializzazioni</option>
+          <option v-for="skill in this.skills" :value="skill.id">{{ skill.name }}</option>
+        </select>
+      </div>
 
-      <select v-model="this.selectedAVG" id="avg" name="avg" class="form-select form-select-sm" aria-label=".form-select-sm example">
-        <option v-for="avg in 5" :value="avg">{{ avg }}</option>
-      </select>
+      <div class="ratings">
+        <label for="avg">Filtra per media voti</label>
+        <select v-model="this.selectedAVG" id="avg" name="avg" class="form-select form-select-sm" aria-label=".form-select-sm example">
+          <option v-for="avg in 5" :value="avg">{{ avg }}</option>
+        </select>
+      </div>
+
+      <div class="reviews">
+        <label for="numRevs">Filtra per numero recensioni</label>
+        <select v-model="this.selectedRevs" id="numRevs" name="numRevs" class="form-select form-select-sm" aria-label=".form-select-sm example">
+          <option v-for="revs in 5" :value="revs">{{ revs }}</option>
+        </select>
+      </div>
       
       <button type="submit" class="btn btn-primary" @click="getDevelopers(), this.getSkillName()">CERCA</button>
 
@@ -94,17 +106,21 @@ export default{
 
 #search{
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   gap: 1em;
   // flex
 
   padding: 2em 0;
 
-  .form-label{
-    margin: 0;
-    min-width: fit-content;
+  .skills{
+    flex-grow: 1;
   }
+
+  button {
+    font-size: .8em;
+  }
+  
 
 }
 </style>
