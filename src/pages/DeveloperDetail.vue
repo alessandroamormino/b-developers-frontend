@@ -12,6 +12,10 @@ export default{
         store,
         isDeveloperFound: false,
         icons: [],
+        ratingAVG: '',
+        fullStars: '',
+        halfStars: '',
+        remainingStars: '',
       };
 
   },
@@ -20,20 +24,44 @@ export default{
     getDevelopers() {
         axios.get(this.store.URI + this.store.APIPath + '/' + this.developerSlug).then(response => {
 
-        if(response.data.developer) {
-            this.isDeveloperFound = true;
-            this.developer = response.data.developer;
-        } else {
-            this.isDeveloperFound = false;
-        }
-    });
-  },
+            if(response.data.developer) {
+                this.isDeveloperFound = true;
+                this.developer = response.data.developer;
+                this.getRatingAVG();
+            } else {
+                this.isDeveloperFound = false;
+            }
+        });
+    },
+
+    getRatingAVG() {
+      let sum = 0; 
+      for(let i=0; i < this.developer.ratings.length; i++){
+        sum += this.developer.ratings[i].rating; 
+      }
+       return this.ratingAVG = sum / this.developer.ratings.length;
+    },
+
+    getFullStars(avg) {
+      return this.fullStar = Math.floor(avg);
+    },
+
+    getHalfStars(avg) {
+      return this.halfStars = Math.floor(avg * 2) / 2 - this.getFullStars(avg);
+    },
+
+    getRemainingStars(avg) {
+      return this.remainingStars = 5 - (this.getFullStars(avg) + Math.round(this.getHalfStars(avg)));
+    },
 
 },
 
   mounted() {
-      this.developerSlug = this.$route.params.slug;
-      this.getDevelopers();
+  },
+
+  created() {
+    this.developerSlug = this.$route.params.slug;
+    this.getDevelopers();
   },
 
   computed: {
@@ -53,7 +81,8 @@ export default{
             this.icons.push(this.developer.skills[i].icon);
         }
         return this.icons;
-    } 
+    } ,
+
 
   }
 
@@ -65,6 +94,9 @@ export default{
 
         <div v-if="this.isDeveloperFound" class="developer-detail">
             <h3 class="mb-3">{{ this.developer.user.name }} {{ this.developer.last_name }}</h3>
+            <div v-if="this.developer.ratings.length > 0" class="stars">
+                <i v-for="star in this.getFullStars(this.ratingAVG)" class="fa-solid fa-star"></i><i v-for="halfStar in this.getHalfStars(this.ratingAVG)" class="fa-solid fa-star-half-stroke"></i><i v-for="star in this.getRemainingStars(this.ratingAVG)" class="fa-regular fa-star "></i> <span> ( {{ this.developer.ratings.length}} )</span>
+            </div>
             <img id="dev-picture" :src="getDevPicture" alt="developer-img">
             <p>Indirizzo: {{ this.developer.address }}</p>
             <p>Telefono: {{ this.developer.phone }}</p>
@@ -90,6 +122,12 @@ export default{
 
 
 <style lang="scss" scoped>
+
+.developer-detail {
+    h3 {
+        text-transform: capitalize;
+    }
+}
 
 #dev-picture {
     width: 300px;
@@ -119,6 +157,17 @@ export default{
       height: 30px;
       object-fit: contain;
 
+    }
+  }
+
+  
+  .stars {
+    .fa-solid.fa-star,
+    .fa-solid.fa-star-half-stroke {
+      color: rgba(235, 210, 71, 0.89);
+    }
+    .fa-regular.fa-star {
+      color: rgb(180, 179, 179);
     }
   }
 
