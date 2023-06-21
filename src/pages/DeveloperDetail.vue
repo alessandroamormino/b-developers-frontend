@@ -83,7 +83,7 @@ export default{
       const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
       axios.post(
-        this.store.URI + 'reviews',
+        this.store.URI + 'admin/reviews',
         {
           name: this.revName,
           comment: this.revContent,
@@ -103,7 +103,7 @@ export default{
       });
 
       axios.post(
-        this.store.URI + 'ratings',
+        this.store.URI + 'admin/ratings',
         {
           rating: this.revRate,
         },
