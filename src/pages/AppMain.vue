@@ -28,6 +28,8 @@ export default{
         this.developers = response.data.results;
         this.skills = response.data.allSkills;
         this.isDeveloperFound = true;
+    console.log(this.developers)
+
       } else {
         this.isDeveloperFound = false;
       }

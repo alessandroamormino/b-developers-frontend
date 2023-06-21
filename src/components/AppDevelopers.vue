@@ -8,6 +8,11 @@ export default{
     return{
       store,
       icons:[],
+      ratingAVG: '',
+      fullStars: '',
+      halfStars: '',
+      remainingStars: '',
+
     }
   }, 
   props: {
@@ -31,9 +36,33 @@ export default{
     return this.icons;
   }
 
-    
   }, 
 
+  methods: {
+    getRatingAVG() {
+      let sum = 0; 
+      for(let i=0; i < this.developers.ratings.length; i++){
+        sum += this.developers.ratings[i].rating; 
+      }
+       return this.ratingAVG = sum / this.developers.ratings.length;
+    },
+
+    getFullStars(avg) {
+      return this.fullStar = Math.floor(avg);
+    },
+
+    getHalfStars(avg) {
+      return this.halfStars = Math.floor(avg * 2) / 2 - this.getFullStars(avg);
+    },
+
+    getRemainingStars(avg) {
+      return this.remainingStars = 5 - (this.getFullStars(avg) + Math.round(this.getHalfStars(avg)));
+    }
+  },
+  
+  created() {
+    this.getRatingAVG();
+  }
   
 }
 </script>
@@ -42,14 +71,17 @@ export default{
     <img id="profile-pic" class="card-img-top" :src="picture" alt="profile-picture">
     <div class="card-body p-0 d-flex flex-column">
       <h5 class="card-title px-3">{{ developers.user.name + ' ' + developers.last_name }}</h5>
+      <div v-if="this.developers.ratings.length > 0" class="stars px-3">
+        <i v-for="star in this.getFullStars(this.ratingAVG)" class="fa-solid fa-star"></i><i v-for="halfStar in this.getHalfStars(this.ratingAVG)" class="fa-solid fa-star-half-stroke"></i><i v-for="star in this.getRemainingStars(this.ratingAVG)" class="fa-regular fa-star "></i> <span> ( {{ this.developers.ratings.length}} )</span>
+      </div>
       <hr>
       <div class="card-text px-3 flex-grow-1">
         <div class="address mt-1"><strong>Indirizzo: </strong>{{developers.address}}</div>
         <div class="phone mt-1"><strong>Telefono: </strong>{{developers.phone}}</div>
         <div class="role mt-1"><strong>Titolo: </strong>{{developers.role}}</div>
         <div class="services mt-1"><strong>Prestazioni: </strong>{{developers.services}}</div>
+        <router-link :to='{name:"developer.show", params:{slug:developers.slug}}'>Vai ai dettagli</router-link>
       </div>
-
       <hr>
       <div class="icons">
         <img class="skill-icon" v-for="icon in getSkillsIcons" :src="this.store.URI + 'storage/' + icon" alt="">
@@ -93,5 +125,16 @@ export default{
 
     }
   }
+
+  .stars {
+    .fa-solid.fa-star,
+    .fa-solid.fa-star-half-stroke {
+      color: rgba(235, 210, 71, 0.89);
+    }
+    .fa-regular.fa-star {
+      color: rgb(180, 179, 179);
+    }
+  }
+
 }
 </style>
