@@ -39,6 +39,8 @@ export default{
   }, 
 
   methods: {
+
+    // funzioni per il calcolo delle stelle per i voti 
     getRatingAVG() {
       let sum = 0; 
       for(let i=0; i < this.developers.ratings.length; i++){
@@ -57,7 +59,11 @@ export default{
 
     getRemainingStars(avg) {
       return this.remainingStars = 5 - (this.getFullStars(avg) + Math.round(this.getHalfStars(avg)));
-    }
+    },
+
+    // ////
+
+
   },
   
   created() {

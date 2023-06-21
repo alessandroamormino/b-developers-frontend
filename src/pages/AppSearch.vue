@@ -12,6 +12,7 @@ export default{
         developers: [],
         skills: [],
         selectedSkill: '',
+        selectedAVG: '',
         isDeveloperFound: false,
         store,
       };
@@ -22,9 +23,7 @@ export default{
   methods: {
   getDevelopers(){
 
-
-    axios.get(this.store.apiURLsearch + this.store.selectedSkill).then(response => {
-
+    axios.get(this.store.apiURLsearch + this.store.selectedSkill + '&avg=' + this.selectedAVG).then(response => {
       if(response.data.success) {
         this.developers = response.data.results;
         console.log(this.developers);
@@ -33,10 +32,7 @@ export default{
       } else {
         this.isDeveloperFound = false;
       }
-
     });
-
-    
   },
 
   getSkillName(){
@@ -66,6 +62,10 @@ export default{
       <select v-model="this.store.selectedSkill" id="skill_id" name="skill_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
         <option value="">Tutte le specializzazioni</option>
         <option v-for="skill in this.skills" :value="skill.id">{{ skill.name }}</option>
+      </select>
+
+      <select v-model="this.selectedAVG" id="avg" name="avg" class="form-select form-select-sm" aria-label=".form-select-sm example">
+        <option v-for="avg in 5" :value="avg">{{ avg }}</option>
       </select>
       
       <button type="submit" class="btn btn-primary" @click="getDevelopers(), this.getSkillName()">CERCA</button>
