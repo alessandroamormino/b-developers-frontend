@@ -59,31 +59,12 @@ export default{
     },
 
     // Invio la recensione
-    // sendReview(){
-    //   axios.post(this.store.URI + 'reviews', {
-    //     name: this.revName,
-    //     comment: this.revContent,
-    //   },{
-    //     headers: {
-    //       'Access-Control-Allow-Origin': 'http://127.0.0.1:8000/',
-    //       'Content-Type': 'application/json',
-    //     },
-    //   });
-
-    //   axios.post(this.store.URI + 'ratings', {
-    //     rating: this.revRate,
-    //   },{
-    //     headers: {
-    //       'Access-Control-Allow-Origin': 'http://127.0.0.1:8000/',
-    //       'Content-Type': 'application/json',
-    //     },
-    //   });
-    // },
     sendReview() {
 
       axios.post(
         this.store.URI + 'api/reviews',
         {
+          developer_id: this.developer.id,
           name: this.revName,
           comment: this.revContent,
         })
@@ -97,6 +78,7 @@ export default{
       axios.post(
         this.store.URI + 'api/ratings',
         {
+          developer_id: this.developer.id,
           rating: this.revRate,
         })
       .then(response => {
@@ -108,16 +90,6 @@ export default{
     }
 
   },
-
-  // mounted() {
-  //   const csrfToken = document.querySelector('meta[name="csrf-token"]');
-  //   if (csrfToken) {
-  //     const token = csrfToken.getAttribute('content');
-  //     // Utilizza il token CSRF come necessario
-  //   } else {
-  //     console.error('Il token CSRF non è presente nel documento.');
-  //   }
-  // },
 
 
   created() {
