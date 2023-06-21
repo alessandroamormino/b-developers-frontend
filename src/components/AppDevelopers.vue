@@ -92,6 +92,9 @@ export default{
       <div v-if="this.developers.ratings.length > 0" class="stars px-3">
         <i v-for="star in this.getFullStars(this.ratingAVG)" class="fa-solid fa-star"></i><i v-for="halfStar in this.getHalfStars(this.ratingAVG)" class="fa-solid fa-star-half-stroke"></i><i v-for="star in this.getRemainingStars(this.ratingAVG)" class="fa-regular fa-star "></i> <span> ( {{ this.developers.ratings.length}} )</span>
       </div>
+      <div class="card-text px-3 py-2">
+        <small v-if="this.developers.numReviews > 0">Numero recensioni: {{ this.developers.numReviews }}</small>
+      </div>
       <hr>
       <div class="card-text px-3 flex-grow-1">
         <div class="address mt-1"><strong>Indirizzo: </strong>{{developers.address}}</div>
