@@ -80,45 +80,30 @@ export default{
     //   });
     // },
     sendReview() {
-      const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
       axios.post(
-        this.store.URI + 'admin/reviews',
+        this.store.URI + 'api/reviews',
         {
           name: this.revName,
           comment: this.revContent,
-        },
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'X-CSRF-TOKEN': csrfToken,
-          },
-        }
-      )
+        })
       .then(response => {
-        // Gestisci la risposta della richiesta POST qui
+        console.log(response)
       })
       .catch(error => {
-        // Gestisci gli errori qui
+        console.log(error)
       });
 
       axios.post(
-        this.store.URI + 'admin/ratings',
+        this.store.URI + 'api/ratings',
         {
           rating: this.revRate,
-        },
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'X-CSRF-TOKEN': csrfToken,
-          },
-        }
-      )
+        })
       .then(response => {
-        // Gestisci la risposta della richiesta POST qui
+        console.log(response)
       })
       .catch(error => {
-        // Gestisci gli errori qui
+        console.log(error)
       });
     }
 
