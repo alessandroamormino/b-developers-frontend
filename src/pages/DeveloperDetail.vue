@@ -30,7 +30,7 @@ export default{
         messageSubject: '',
         messageDate: '',
         messageContent: '',
-        isMessageVisible: true,
+        isMessageVisible: false,
       };
 
   },
