@@ -23,6 +23,14 @@ export default{
         revRate: '',
         revContent: '',
         completeName: '',
+
+        // messaggi
+        messageName: '',
+        messageEmail: '',
+        messageSubject: '',
+        messageDate: '',
+        messageContent: '',
+        isMessageVisible: true,
       };
 
   },
@@ -108,8 +116,40 @@ export default{
       alert("Voto inviato correttamente");
     },
 
+    sendMessage(){
+      axios.post(
+        this.store.URI + 'api/messages', 
+      {
+        developer_id: this.developer.id,
+        name: this.messageName,
+        email: this.messageEmail,
+        subject: this.messageSubject,
+        content: this.messageContent,
+        meeting_date: this.messageDate,
+      })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error)
+      });
+
+      this.messageName = '';
+      this.messageEmail = '';
+      this.messageSubject = '';
+      this.messageContent = '';
+      this.messageDate = '';
+
+      alert("Messaggio inviato correttamente");
+
+    },
+
     colorStars(index){
       console.log(index);
+    }, 
+
+    showMessageBox(){
+      this.isMessageVisible = !this.isMessageVisible;
     }
 
 
@@ -147,67 +187,101 @@ export default{
 </script>
 <template>
     <div class="container">
-        <h1 class="py-5">Dettagli Sviluppatore</h1>
+      <h1 class="py-5">Dettagli Sviluppatore</h1>
 
-        <div v-if="this.isDeveloperFound" class="developer-detail">
-            <h3 class="mb-3">{{ this.developer.user.name }} {{ this.developer.last_name }}</h3>
-            <img id="dev-picture" :src="getDevPicture" alt="developer-img">
-            <div v-if="this.developer.ratings.length > 0" class="stars">
-                <i v-for="star in this.getFullStars(this.ratingAVG)" class="fa-solid fa-star"></i><i v-for="halfStar in this.getHalfStars(this.ratingAVG)" class="fa-solid fa-star-half-stroke"></i><i v-for="star in this.getRemainingStars(this.ratingAVG)" class="fa-regular fa-star "></i> <span> ( Voti Totali: {{ this.developer.ratings.length}} )</span>
-            </div>
-            <hr>
-            <div class="info">
-              <h4>Informazioni</h4>
-              <p><strong>Indirizzo:</strong> {{ this.developer.address }}</p>
-              <p><strong>Telefono:</strong> {{ this.developer.phone }}</p>
-              <p><strong>Titolo:</strong> {{ this.developer.role }}</p>
-              <p><strong>Prestazioni:</strong> {{ this.developer.services }}</p>
-            </div>
-            <hr>
-            <h4>Specializzazioni</h4>
-            <div class="icons">
-                <img class="skill-icon" v-for="icon in getSkillsIcons" :src="this.store.URI + 'storage/' + icon" alt="">
-            </div>
-            <hr>
-            <h4>Curriculum</h4>
-            <img id="dev-curriculum" :src="getDevCV" alt="developer-cv">
-        </div>
-        <div v-else class="alert alert-warning">
-            <p>Lo sviluppatore non è stato trovato</p>
-        </div>
-        <hr>
+      <div v-if="this.isDeveloperFound" class="developer-detail">
+          <h3 class="mb-3">{{ this.developer.user.name }} {{ this.developer.last_name }}</h3>
+          <img id="dev-picture" :src="getDevPicture" alt="developer-img">
+          <div v-if="this.developer.ratings.length > 0" class="stars">
+              <i v-for="star in this.getFullStars(this.ratingAVG)" class="fa-solid fa-star"></i><i v-for="halfStar in this.getHalfStars(this.ratingAVG)" class="fa-solid fa-star-half-stroke"></i><i v-for="star in this.getRemainingStars(this.ratingAVG)" class="fa-regular fa-star "></i> <span> ( Voti Totali: {{ this.developer.ratings.length}} )</span>
+          </div>
+          <hr>
+          <div class="info">
+            <h4>Informazioni</h4>
+            <p><strong>Indirizzo:</strong> {{ this.developer.address }}</p>
+            <p><strong>Telefono:</strong> {{ this.developer.phone }}</p>
+            <p><strong>Titolo:</strong> {{ this.developer.role }}</p>
+            <p><strong>Prestazioni:</strong> {{ this.developer.services }}</p>
+          </div>
+          <hr>
+          <h4>Specializzazioni</h4>
+          <div class="icons">
+              <img class="skill-icon" v-for="icon in getSkillsIcons" :src="this.store.URI + 'storage/' + icon" alt="">
+          </div>
+          <hr>
+          <h4>Curriculum</h4>
+          <img id="dev-curriculum" :src="getDevCV" alt="developer-cv">
+      </div>
+      <div v-else class="alert alert-warning">
+          <p>Lo sviluppatore non è stato trovato</p>
+      </div>
+      <hr>
 
-        <div class="ratings-form">
-          <h4>Dai un voto a <span>{{this.completeName}}</span></h4>
+      <div class="ratings-form">
+        <h4>Dai un voto a <span>{{this.completeName}}</span></h4>
 
-          <!-- <i v-for="(star, index) in 5" class="fa-regular fa-star" @mouseover="colorStars(index)"></i> -->
-          <!-- <star-rating v-model:rating="rating"></star-rating> -->
-          <star-rating :rounded-corners="true" :border-width="3" :rating="1" v-model:rating="this.revRate" @click="sendRate()" :star-size="25" active-color="#ffe030" border-color="#999" ></star-rating>
-        </div>
+        <!-- <i v-for="(star, index) in 5" class="fa-regular fa-star" @mouseover="colorStars(index)"></i> -->
+        <!-- <star-rating v-model:rating="rating"></star-rating> -->
+        <star-rating :rounded-corners="true" :border-width="3" :rating="1" v-model:rating="this.revRate" @click="sendRate()" :star-size="25" active-color="#ffe030" border-color="#999" ></star-rating>
+      </div>
 
-        <hr>
+      <hr>
 
-        <div class="reviews-form">
-          <h4>Lascia una tua recensione</h4>
-          <form @submit.prevent="sendReview()" method="POST">
-            <div class="mb-3 info-user">
-              <label for="name" class="form-label">Inserisci il tuo nome completo</label>
-              <input type="text" id="name" name="name" v-model="this.revName" class="form-control" required>
-            </div>
-            <!-- <div class="mb-3 ratings">
-              <label for="rating" class="form-label">Dai un voto da 1 a 5</label>
-              <input type="number" min="1" max="5" v-model="this.revRate" class="form-control">
-            </div> -->
-            <div class="mb-3 content">
-              <label for="content" class="form-label">Inserisci il tuo commento</label>
-              <textarea name="content" id="content" cols="30" rows="10" v-model="this.revContent" class="form-control" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Invia</button>
-          </form>
-        </div>
-
+      <div class="reviews-form">
+        <h4>Lascia una tua recensione</h4>
+        <form @submit.prevent="sendReview()" method="POST">
+          <div class="mb-3 info-user">
+            <label for="name" class="form-label">Inserisci il tuo nome completo</label>
+            <input type="text" id="name" name="name" v-model="this.revName" class="form-control" required>
+          </div>
+          <!-- <div class="mb-3 ratings">
+            <label for="rating" class="form-label">Dai un voto da 1 a 5</label>
+            <input type="number" min="1" max="5" v-model="this.revRate" class="form-control">
+          </div> -->
+          <div class="mb-3 content">
+            <label for="content" class="form-label">Inserisci il tuo commento</label>
+            <textarea name="content" id="content" cols="30" rows="10" v-model="this.revContent" class="form-control" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Invia</button>
+        </form>
+      </div>
     </div>
 
+    <!-- Messaggi -->
+    
+    <div class="messages-box" @click="showMessageBox()">
+      <i class="fa-solid fa-envelope" style="color: #f7f7f7;"></i>
+    </div>
+
+    <div class="card p-3 message-form-container" :class="this.isMessageVisible ? 'show' : 'hide'">
+      <h5>Lascia un messaggio a <span>{{this.completeName}}</span></h5>
+      <form @submit.prevent="sendMessage()" method="POST">
+        <!-- name 	email 	subject 	meeting_date 	content -->
+        <div class="mb-3 info-user">
+          <label for="name" class="form-label">Inserisci il tuo nome completo</label>
+          <input type="text" id="name" name="name" v-model="this.messageName" class="form-control" required>
+        </div>
+        <div class="mb-3 info-mail">
+          <label for="email" class="form-label">Inserisci la tua mail</label>
+          <input type="email" id="email" name="email" v-model="this.messageEmail" class="form-control" required>
+        </div>
+        <div class="mb-3 subject">
+          <label for="subject" class="form-label">Oggetto</label>
+          <input type="text" id="subject" name="subject" v-model="this.messageSubject" class="form-control" required>
+        </div>
+        <div class="mb-3 date">
+          <label for="meeting_date" class="form-label">Oggetto</label>
+          <input type="datetime-local" id="meeting_date" name="meeting_date" v-model="this.messageDate" class="form-control" required>
+        </div>
+        <div class="mb-3 content">
+          <label for="content" class="form-label">Inserisci il tuo messaggio</label>
+          <textarea name="content" id="content" cols="30" rows="10" v-model="this.messageContent" class="form-control" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Invia</button>
+      </form>
+    </div>
+
+    
    
 </template>
 
@@ -278,6 +352,53 @@ export default{
         text-transform: capitalize;
       }
     }
+  }
+
+  .messages-box{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    // position
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // flex
+    border-radius: 50%;
+    background-color: #FA7D3D;
+
+    width: 100px;
+    height: 100px;
+
+    margin: 1em;
+
+    cursor: pointer;
+
+    transition: transform .3s ease-in-out;
+    &:hover{
+      transform: scale(1.1);
+    }
+
+    i{
+      font-size: 2.5em;
+    }
+  }
+  .message-form-container{
+    position: fixed;
+    right: 2em;
+    bottom: 9em;
+    width: 500px;
+    &.hide{
+      display: none;
+    }
+    &.show{
+      display: block;
+    }
+    h5{
+      span{
+        text-transform: capitalize;
+      }
+    }
+
   }
 
 </style>
