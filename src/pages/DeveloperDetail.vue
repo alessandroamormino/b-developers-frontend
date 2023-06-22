@@ -40,6 +40,12 @@ export default{
   },
 
   methods: {
+
+    close(el) {
+      this.isMessageVisible = false;
+    },
+
+
     getDevelopers() {
         axios.get(this.store.URI + this.store.APIPath + '/' + this.developerSlug).then(response => {
             if(response.data.developer) {
@@ -149,7 +155,7 @@ export default{
     }, 
 
     showMessageBox(){
-      this.isMessageVisible = !this.isMessageVisible;
+      this.isMessageVisible = !this.isMessageVisible;         
     }
 
 
@@ -249,7 +255,7 @@ export default{
 
     <!-- Messaggi -->
     
-    <div class="messages-box" @click="showMessageBox()">
+    <div class="messages-box" v-click-outside-element="close" @click="showMessageBox()">
       <i class="fa-solid fa-envelope" style="color: #f7f7f7;"></i>
     </div>
 
