@@ -41,9 +41,9 @@ export default{
 
   methods: {
 
-    close(el) {
-      this.isMessageVisible = false;
-    },
+    //close(el) {
+   //   this.isMessageVisible = false;
+    //},
 
 
     getDevelopers() {
@@ -93,14 +93,17 @@ export default{
         })
       .then(response => {
         console.log(response)
+
+        alert("Recensione inviata correttamente");
       })
       .catch(error => {
         console.log(error)
+
+        alert("La recensione non è stata inviata.");
       });
 
       this.revName = '';
       this.revContent = '';
-      alert("Messaggio inviato correttamente");
 
     }, 
 
@@ -113,13 +116,16 @@ export default{
         })
       .then(response => {
         console.log(response)
+
+        alert("Voto inviato correttamente");
       })
       .catch(error => {
         console.log(error)
+
+        alert("Il voto non è stato inviato");
       });
 
       this.revRate = '';
-      alert("Voto inviato correttamente");
     },
 
     sendMessage(){
@@ -135,9 +141,13 @@ export default{
       })
       .then(response => {
         console.log(response);
+
+        alert("Messaggio inviato correttamente");
       })
       .catch(error => {
         console.log(error)
+
+        alert("Il messaggio non è stato inviato");
       });
 
       this.messageName = '';
@@ -255,7 +265,7 @@ export default{
 
     <!-- Messaggi -->
     
-    <div class="messages-box" v-click-outside-element="close" @click="showMessageBox()">
+    <div class="messages-box" @click="showMessageBox()">
       <i class="fa-solid fa-envelope" style="color: #f7f7f7;"></i>
     </div>
 
