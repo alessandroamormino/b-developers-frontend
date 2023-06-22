@@ -23,7 +23,6 @@ export default{
 
   methods: {
   getDevelopers(){
-
     axios.get(this.store.apiURLsearch + this.store.selectedSkill + '&avg=' + this.selectedAVG + '&numRevs=' + this.selectedRevs).then(response => {
       if(response.data.success) {
         this.developers = response.data.results;
@@ -74,9 +73,10 @@ export default{
       </div>
 
       <div class="reviews">
-        <label for="numRevs">Filtra per numero recensioni</label>
+        <label for="numRevs">Ordina per numero di recensioni</label>
         <select v-model="this.selectedRevs" id="numRevs" name="numRevs" class="form-select form-select-sm" aria-label=".form-select-sm example">
-          <option v-for="revs in [0, 1, 2, 3, 4, 5]" :value="revs">{{ revs }}</option>
+          <option value="1">Maggiore</option>
+          <option value="2">Minore</option>
         </select>
       </div>
       

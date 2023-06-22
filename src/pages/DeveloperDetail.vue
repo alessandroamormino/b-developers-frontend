@@ -153,7 +153,7 @@ export default{
             <h3 class="mb-3">{{ this.developer.user.name }} {{ this.developer.last_name }}</h3>
             <img id="dev-picture" :src="getDevPicture" alt="developer-img">
             <div v-if="this.developer.ratings.length > 0" class="stars">
-                <i v-for="star in this.getFullStars(this.ratingAVG)" class="fa-solid fa-star"></i><i v-for="halfStar in this.getHalfStars(this.ratingAVG)" class="fa-solid fa-star-half-stroke"></i><i v-for="star in this.getRemainingStars(this.ratingAVG)" class="fa-regular fa-star "></i> <span> ( {{ this.developer.ratings.length}} )</span>
+                <i v-for="star in this.getFullStars(this.ratingAVG)" class="fa-solid fa-star"></i><i v-for="halfStar in this.getHalfStars(this.ratingAVG)" class="fa-solid fa-star-half-stroke"></i><i v-for="star in this.getRemainingStars(this.ratingAVG)" class="fa-regular fa-star "></i> <span> ( Voti Totali: {{ this.developer.ratings.length}} )</span>
             </div>
             <hr>
             <div class="info">
