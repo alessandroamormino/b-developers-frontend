@@ -3,6 +3,9 @@
 import axios from 'axios';
 import {store} from '../store.js';
 
+// stelline
+import StarRating from 'vue-star-rating';
+
 export default{
   name: "DeveloperDetail",
   data() {
@@ -19,8 +22,13 @@ export default{
         revName: '',
         revRate: '',
         revContent: '',
+        completeName: '',
       };
 
+  },
+
+  components: {
+    StarRating,
   },
 
   methods: {
@@ -29,6 +37,7 @@ export default{
             if(response.data.developer) {
                 this.isDeveloperFound = true;
                 this.developer = response.data.developer;
+                this.completeName = this.developer.user.name + ' ' + this.developer.last_name;
                 this.getRatingAVG();
             } else {
                 this.isDeveloperFound = false;
@@ -75,6 +84,13 @@ export default{
         console.log(error)
       });
 
+      this.revName = '';
+      this.revContent = '';
+      alert("Messaggio inviato correttamente");
+
+    }, 
+
+    sendRate(){
       axios.post(
         this.store.URI + 'api/ratings',
         {
@@ -88,11 +104,12 @@ export default{
         console.log(error)
       });
 
-      this.revName = '';
       this.revRate = '';
-      this.revContent = '';
-      alert("Messaggio inviato correttamente");
+      alert("Voto inviato correttamente");
+    },
 
+    colorStars(index){
+      console.log(index);
     }
 
 
@@ -160,6 +177,16 @@ export default{
         </div>
         <hr>
 
+        <div class="ratings-form">
+          <h4>Dai un voto a <span>{{this.completeName}}</span></h4>
+
+          <!-- <i v-for="(star, index) in 5" class="fa-regular fa-star" @mouseover="colorStars(index)"></i> -->
+          <!-- <star-rating v-model:rating="rating"></star-rating> -->
+          <star-rating :rounded-corners="true" :border-width="3" :rating="1" v-model:rating="this.revRate" @click="sendRate()" :star-size="25"></star-rating>
+        </div>
+
+        <hr>
+
         <div class="reviews-form">
           <h4>Lascia una tua recensione</h4>
           <form @submit.prevent="sendReview()" method="POST">
@@ -167,13 +194,13 @@ export default{
               <label for="name" class="form-label">Inserisci il tuo nome completo</label>
               <input type="text" id="name" name="name" v-model="this.revName" class="form-control" required>
             </div>
-            <div class="mb-3 ratings">
+            <!-- <div class="mb-3 ratings">
               <label for="rating" class="form-label">Dai un voto da 1 a 5</label>
               <input type="number" min="1" max="5" v-model="this.revRate" class="form-control">
-            </div>
+            </div> -->
             <div class="mb-3 content">
               <label for="content" class="form-label">Inserisci il tuo commento</label>
-              <textarea name="content" id="content" cols="30" rows="10" v-model="this.revContent" class="form-control"></textarea>
+              <textarea name="content" id="content" cols="30" rows="10" v-model="this.revContent" class="form-control" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Invia</button>
           </form>
@@ -243,6 +270,14 @@ export default{
 
   .reviews-form {
     margin: 2em 0;
+  }
+
+  .ratings-form {
+    h4{
+      span{
+        text-transform: capitalize;
+      }
+    }
   }
 
 </style>
