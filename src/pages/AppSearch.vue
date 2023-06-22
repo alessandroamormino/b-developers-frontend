@@ -69,14 +69,14 @@ export default{
       <div class="ratings">
         <label for="avg">Filtra per media voti</label>
         <select v-model="this.selectedAVG" id="avg" name="avg" class="form-select form-select-sm" aria-label=".form-select-sm example">
-          <option v-for="avg in 5" :value="avg">{{ avg }}</option>
+          <option v-for="avg in ['-', 1, 2, 3, 4, 5]" :value="avg">{{ avg }}</option>
         </select>
       </div>
 
       <div class="reviews">
         <label for="numRevs">Filtra per numero recensioni</label>
         <select v-model="this.selectedRevs" id="numRevs" name="numRevs" class="form-select form-select-sm" aria-label=".form-select-sm example">
-          <option v-for="revs in 5" :value="revs">{{ revs }}</option>
+          <option v-for="revs in [0, 1, 2, 3, 4, 5]" :value="revs">{{ revs }}</option>
         </select>
       </div>
       

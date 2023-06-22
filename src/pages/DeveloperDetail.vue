@@ -87,7 +87,14 @@ export default{
       .catch(error => {
         console.log(error)
       });
+
+      this.revName = '';
+      this.revRate = '';
+      this.revContent = '';
+      alert("Messaggio inviato correttamente");
+
     }
+
 
   },
 
@@ -158,7 +165,7 @@ export default{
           <form @submit.prevent="sendReview()" method="POST">
             <div class="mb-3 info-user">
               <label for="name" class="form-label">Inserisci il tuo nome completo</label>
-              <input type="text" id="name" name="name" v-model="this.revName" class="form-control">
+              <input type="text" id="name" name="name" v-model="this.revName" class="form-control" required>
             </div>
             <div class="mb-3 ratings">
               <label for="rating" class="form-label">Dai un voto da 1 a 5</label>

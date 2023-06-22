@@ -94,6 +94,7 @@ export default{
       </div>
       <div class="card-text px-3 py-2">
         <small v-if="this.developers.numReviews > 0">Numero recensioni: {{ this.developers.numReviews }}</small>
+        <small v-else>Numero recensioni: 0</small>
       </div>
       <hr>
       <div class="card-text px-3 flex-grow-1">
