@@ -15,7 +15,7 @@ export default{
         selectedAVG: '',
         isDeveloperFound: false,
         store,
-        selectedRevs: '',
+        selectedRevs: '1',
       };
 
   },
@@ -75,7 +75,7 @@ export default{
       <div class="reviews">
         <label for="numRevs">Ordina per numero di recensioni</label>
         <select v-model="this.selectedRevs" id="numRevs" name="numRevs" class="form-select form-select-sm" aria-label=".form-select-sm example">
-          <option value="1">Maggiore</option>
+          <option value="1" >Maggiore</option>
           <option value="2">Minore</option>
         </select>
       </div>

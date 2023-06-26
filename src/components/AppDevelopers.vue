@@ -99,6 +99,7 @@ export default{
       </div>
       <hr>
       <div class="card-text px-3 flex-grow-1">
+        <!-- <div class="advertisement"><strong>Sponsorizzazione: </strong> <span v-if="developers.advertisements.length > 0" v-for="adv in developers.advertisements">{{ adv.name }} </span> <span v-else> Nessuna sponsorizzazione</span> </div> -->
         <div class="address mt-1"><strong>Indirizzo: </strong>{{developers.address}}</div>
         <div class="phone mt-1"><strong>Telefono: </strong>{{developers.phone}}</div>
         <div class="role mt-1"><strong>Titolo: </strong>{{developers.role}}</div>

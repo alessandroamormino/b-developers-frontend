@@ -5,6 +5,7 @@ import {store} from '../store.js';
 
 
 import AppDevelopers from '../components/AppDevelopers.vue';
+import AppSponsor from '../components/AppSponsor.vue';
 
 import AppHeader from '../components/AppHeader.vue';
 export default{
@@ -12,13 +13,14 @@ export default{
   data() {
       return {
         developers: [],
+        sponsoredDevelopers: [],
         skills: [],
         isDeveloperFound: false,
         store,
 
       };
   },
-  components: { AppDevelopers, AppHeader }, 
+  components: { AppDevelopers, AppHeader, AppSponsor }, 
 
   methods: {
   getDevelopers(){
@@ -26,10 +28,10 @@ export default{
     axios.get(this.store.apiURLsearch).then(response => {
       
       if(response.data.success) {
-        this.developers = response.data.results;
+        this.sponsoredDevelopers = response.data.results[0];
+        this.developers = response.data.results[1];
         this.skills = response.data.allSkills;
         this.isDeveloperFound = true;
-    console.log(this.developers)
 
       } else {
         this.isDeveloperFound = false;
@@ -58,8 +60,7 @@ export default{
 <template>
   <AppHeader></AppHeader>
   <div class="container my-4">
-    <h1>Tutti gli sviluppatori</h1>
-
+    <h1>Sviluppatori</h1>
     <form id="search" @submit.prevent="" action="">
       <!-- <label for="skillInput" class="form-label">Ricerca per specializzazione</label>
       <input v-model="this.selectedSkill" class="form-control" list="skillList" id="skillInput" @change="getDevelopers()" placeholder="Nome Specializzazione...">
@@ -80,6 +81,10 @@ export default{
     
 
     <div v-if="this.isDeveloperFound" class="container all-developers">
+      <h2 class="w-100">In evidenza</h2>
+      <AppSponsor v-for="developer in this.sponsoredDevelopers" :developers="developer"></AppSponsor>
+
+      <h2 class="w-100">Altri sviluppatori</h2>
       <AppDevelopers v-for="developer in this.developers" :developers="developer"></AppDevelopers>
     </div>
     <div v-else class="alert alert-warning">
