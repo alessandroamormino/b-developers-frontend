@@ -23,6 +23,7 @@ export default{
 
   methods: {
   getDevelopers(){
+    console.log(this.store.apiURLsearch + this.store.selectedSkill + '&avg=' + this.selectedAVG + '&numRevs=' + this.selectedRevs);
     axios.get(this.store.apiURLsearch + this.store.selectedSkill + '&avg=' + this.selectedAVG + '&numRevs=' + this.selectedRevs).then(response => {
       if(response.data.success) {
         this.developers = response.data.results;
@@ -68,7 +69,10 @@ export default{
       <div class="ratings">
         <label for="avg">Filtra per media voti</label>
         <select v-model="this.selectedAVG" id="avg" name="avg" class="form-select form-select-sm" aria-label=".form-select-sm example">
-          <option v-for="avg in ['-', 1, 2, 3, 4, 5]" :value="avg">{{ avg }}</option>
+          <option v-for="avg in ['', 1, 2, 3, 4, 5]" :value="avg">
+            <span v-if="avg != ''">{{ avg }}</span>
+            <span v-else>-</span>
+          </option>
         </select>
       </div>
 
