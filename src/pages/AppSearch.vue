@@ -16,6 +16,10 @@ export default{
         isDeveloperFound: false,
         store,
         selectedRevs: '1',
+        sponsoredDevs: [],
+        sponsoredDevs2: [],
+        notSponsoredDevs: [],
+        orderedDevs: [],
       };
 
   },
@@ -23,10 +27,48 @@ export default{
 
   methods: {
   getDevelopers(){
-    console.log(this.store.apiURLsearch + this.store.selectedSkill + '&avg=' + this.selectedAVG + '&numRevs=' + this.selectedRevs);
+    // console.log(this.store.apiURLsearch + this.store.selectedSkill + '&avg=' + this.selectedAVG + '&numRevs=' + this.selectedRevs);
     axios.get(this.store.apiURLsearch + this.store.selectedSkill + '&avg=' + this.selectedAVG + '&numRevs=' + this.selectedRevs).then(response => {
       if(response.data.success) {
         this.developers = response.data.results;
+        console.log(this.developers);
+        
+
+        // const m = new Date();
+        // const dateString =
+        //     m.getUTCFullYear() + "-" +
+        //     ("0" + (m.getUTCMonth()+1)).slice(-2) + "-" +
+        //     ("0" + m.getUTCDate()).slice(-2) + " " +
+        //     ("0" + m.getUTCHours()).slice(-2) + ":" +
+        //     ("0" + m.getUTCMinutes()).slice(-2) + ":" +
+        //     ("0" + m.getUTCSeconds()).slice(-2);
+
+        // for(let i=0; i<this.developers.length; i++){
+        //   if(this.developers[i].advertisements.length > 0){
+        //     this.sponsoredDevs.push(this.developers[i]);
+        //   } else {
+        //     this.notSponsoredDevs.push(this.developers[i]);
+        //   }
+        // }
+
+        // for(let z=0; z<this.sponsoredDevs.length; z++){
+        //   for(let y=0; y<this.sponsoredDevs[z].advertisements.length; y++){
+        //     if(this.sponsoredDevs[z].advertisements[y].pivot.ending_date >= dateString){
+        //       this.sponsoredDevs2.push(this.sponsoredDevs[z]); 
+        //     } else {
+        //       this.notSponsoredDevs.unshift(this.sponsoredDevs[z]);
+        //     }
+        //   }
+        // }
+        // this.orderedDevs = [...this.sponsoredDevs2, ...this.notSponsoredDevs];
+        // this.developers = [];
+        // this.developers = [...this.orderedDevs];
+        // this.orderedDevs = [];
+        // this.sponsoredDevs = [];
+        // this.notSponsoredDevs = [];
+        // this.sponsoredDevs2 = [];
+        // console.log(this.developers);
+
         this.skills = response.data.allSkills;
         this.isDeveloperFound = true;
       } else {
