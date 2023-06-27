@@ -156,7 +156,7 @@ export default{
       this.messageContent = '';
       this.messageDate = '';
 
-      alert("Messaggio inviato correttamente");
+      // alert("Messaggio inviato correttamente");
 
     },
 

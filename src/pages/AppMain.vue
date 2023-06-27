@@ -6,8 +6,8 @@ import {store} from '../store.js';
 
 import AppDevelopers from '../components/AppDevelopers.vue';
 import AppSponsor from '../components/AppSponsor.vue';
-
 import AppHeader from '../components/AppHeader.vue';
+
 export default{
   name: "AppMain",
   data() {
