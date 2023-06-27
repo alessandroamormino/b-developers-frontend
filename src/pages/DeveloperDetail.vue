@@ -287,7 +287,7 @@ export default{
         </div>
         <div class="mb-3 date">
           <label for="meeting_date" class="form-label">Data Appuntamento</label>
-          <input type="datetime-local" id="meeting_date" name="meeting_date" v-model="this.messageDate" class="form-control" required>
+          <input type="datetime-local" id="meeting_date" name="meeting_date" v-model="this.messageDate" class="form-control">
         </div>
         <div class="mb-3 content">
           <label for="content" class="form-label">Inserisci il tuo messaggio</label>
