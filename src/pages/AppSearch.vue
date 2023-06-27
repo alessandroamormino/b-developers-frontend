@@ -78,6 +78,7 @@ export default{
 
       } else {
         this.isDeveloperFound = false;
+        this.loaderVisible = false;
       }
     });
   },
