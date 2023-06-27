@@ -7,6 +7,8 @@ import {store} from '../store.js';
 import AppDevelopers from '../components/AppDevelopers.vue';
 import AppSponsor from '../components/AppSponsor.vue';
 import AppHeader from '../components/AppHeader.vue';
+import AppCategories from '../components/AppCategories.vue';
+
 
 export default{
   name: "AppMain",
@@ -21,7 +23,7 @@ export default{
 
       };
   },
-  components: { AppDevelopers, AppHeader, AppSponsor }, 
+  components: { AppDevelopers, AppHeader, AppSponsor, AppCategories }, 
 
   methods: {
   getDevelopers(){
@@ -99,6 +101,7 @@ export default{
 
   <div class="loader" v-if="loaderVisible"></div>
 
+  <AppCategories></AppCategories>
 </template>
 <style lang="scss" scoped>
 

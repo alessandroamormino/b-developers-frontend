@@ -1,7 +1,6 @@
 <script>
 import AppNav from './components/AppNav.vue';
 import AppFooter from './components/AppFooter.vue';
-import AppCategories from './components/AppCategories.vue';
 
 export default {
   data(){
@@ -9,14 +8,13 @@ export default {
 
     }
   }, 
-  components: { AppNav, AppFooter, AppCategories }
+  components: { AppNav, AppFooter}
 }
 </script>
 
 <template>
   <AppNav></AppNav>
   <router-view></router-view>
-  <AppCategories></AppCategories>
   <AppFooter></AppFooter>
 </template>
 
