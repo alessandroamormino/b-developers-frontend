@@ -31,6 +31,16 @@ export default{
         messageDate: '',
         messageContent: '',
         isMessageVisible: false,
+        loaderVisible: false,
+
+        messageSent: false,
+        messageFailed: false,
+
+        rateSent: false,
+        rateFailed: false,
+
+        reviewSent: false,
+        reviewFailed: false,
       };
 
   },
@@ -47,12 +57,15 @@ export default{
 
 
     getDevelopers() {
+      this.loaderVisible = true;
+
         axios.get(this.store.URI + this.store.APIPath + '/' + this.developerSlug).then(response => {
             if(response.data.developer) {
                 this.isDeveloperFound = true;
                 this.developer = response.data.developer;
                 this.completeName = this.developer.user.name + ' ' + this.developer.last_name;
                 this.getRatingAVG();
+                this.loaderVisible = false;
             } else {
                 this.isDeveloperFound = false;
             }
@@ -83,6 +96,7 @@ export default{
 
     // Invio la recensione
     sendReview() {
+      this.loaderVisible = true;
 
       axios.post(
         this.store.URI + 'api/reviews',
@@ -93,13 +107,13 @@ export default{
         })
       .then(response => {
         console.log(response)
-
-        alert("Recensione inviata correttamente");
+        this.loaderVisible = false;
+        this.reviewSent = true;
       })
       .catch(error => {
         console.log(error)
-
-        alert("La recensione non è stata inviata.");
+        this.loaderVisible = false;
+        this.reviewFailed = true;
       });
 
       this.revName = '';
@@ -108,6 +122,8 @@ export default{
     }, 
 
     sendRate(){
+      this.loaderVisible = true;
+
       axios.post(
         this.store.URI + 'api/ratings',
         {
@@ -116,19 +132,21 @@ export default{
         })
       .then(response => {
         console.log(response)
-
-        alert("Voto inviato correttamente");
+        this.loaderVisible = false;
+        this.rateSent = true;
       })
       .catch(error => {
         console.log(error)
-
-        alert("Il voto non è stato inviato");
+        this.loaderVisible = false;
+        this.rateFailed = true;
       });
 
       this.revRate = '';
     },
 
     sendMessage(){
+      this.loaderVisible = true;
+
       axios.post(
         this.store.URI + 'api/messages', 
       {
@@ -141,13 +159,13 @@ export default{
       })
       .then(response => {
         console.log(response);
-
-        alert("Messaggio inviato correttamente");
+        this.loaderVisible = false;
+        this.messageSent = true;
       })
       .catch(error => {
         console.log(error)
-
-        alert("Il messaggio non è stato inviato");
+        this.loaderVisible = false;
+        this.messageFail = true;
       });
 
       this.messageName = '';
@@ -166,6 +184,16 @@ export default{
 
     showMessageBox(){
       this.isMessageVisible = !this.isMessageVisible;         
+    },
+
+    closeMessage() {
+      this.messageSent = false;
+      this.messageFailed = false;
+      this.rateSent = false;
+      this.rateFailed = false;
+      this.reviewSent = false;
+      this.reviewFailed = false;
+      this.isMessageVisible = false;
     }
 
 
@@ -303,6 +331,23 @@ export default{
       </div>
     </div>
 
+    <div class="loader" v-if="loaderVisible"></div>
+
+    <!-- messages alerts -->
+    <div class="my-alert" v-if="messageSent" >Messaggio inviato correttamente <button @click="closeMessage()" class="btn btn-primary">Ok</button></div>
+    <div class="my-alert" v-if="messageFailed">IL messaggio non è stato inviato</div>
+    <!--///  -->
+
+    <!-- ratings alerts -->
+    <div class="my-alert" v-if="rateSent" >Voto inviato correttamente <button @click="closeMessage()" class="btn btn-primary">Ok</button></div>
+    <div class="my-alert" v-if="rateFailed" >Voto non inviato<button @click="closeMessage()" class="btn btn-primary">Ok</button></div>
+    <!-- /// -->
+
+    <!-- reviews alerts -->
+    <div class="my-alert" v-if="reviewSent" >La recensione è stata inviata correttamente <button @click="closeMessage()" class="btn btn-primary">Ok</button></div>
+    <div class="my-alert" v-if="reviewFailed">Recensione non inviata<button @click="closeMessage()" class="btn btn-primary">Ok</button></div>
+    <!-- /// -->
+
     
    
 </template>
@@ -421,6 +466,59 @@ export default{
       }
     }
 
+  }
+
+
+
+  .loader {
+   position: fixed;
+   top: 50%;
+   right: 49%;
+   transform: translateX(-50%);
+   width:50px;
+   height:50px;
+   border-radius:100%;
+   border:5px solid;
+   border-top-color:rgba(254, 168, 23, 0.65);
+   border-bottom-color:rgba(57, 154, 219, 0.65);
+   border-left-color:rgba(188, 84, 93, 0.95);
+   border-right-color:rgba(137, 188, 79, 0.95);
+   -webkit-animation: loading 1s ease-in-out infinite alternate;
+   animation: loading 1s ease-in-out infinite alternate;
+  }
+
+  @keyframes loading {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(720deg);}
+  }
+
+  @-webkit-keyframes loading {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(720deg);}
+  }
+
+  .my-alert {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 15px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+
+    color: rgba(57, 154, 219, 0.911);
+    background-color: #faf4f4;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.164);
+
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.37);
+    border-radius: 20px;
+    font-weight: bold;
+
+    button {
+      width: 30%;
+    }
   }
 
 </style>
