@@ -13,6 +13,7 @@ export default{
       halfStars: '',
       remainingStars: '',
       isSponsored: false,
+      length_object: ''
     }
   }, 
   props: {
@@ -61,7 +62,9 @@ export default{
     },
 
     checkSponsor(){
-      if(this.developers.sponsor.length > 0){
+      this.length_object = Object.keys(this.developers.sponsor).length;
+      console.log(this.length_object)
+      if(this.length_object > 0){
         this.isSponsored = true;
       } else {
         this.isSponsored = false;
