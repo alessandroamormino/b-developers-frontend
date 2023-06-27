@@ -17,6 +17,7 @@ export default{
         skills: [],
         isDeveloperFound: false,
         store,
+        loaderVisible: false,
 
       };
   },
@@ -24,6 +25,7 @@ export default{
 
   methods: {
   getDevelopers(){
+    this.loaderVisible = true;
 
     axios.get(this.store.apiURLsearch).then(response => {
       
@@ -32,6 +34,7 @@ export default{
         this.developers = response.data.results[1];
         this.skills = response.data.allSkills;
         this.isDeveloperFound = true;
+        this.loaderVisible = false;
 
       } else {
         this.isDeveloperFound = false;
@@ -91,6 +94,9 @@ export default{
       Non ci sono sviluppatori con questa specializzazione
     </div>
   </div>
+
+  <div class="loader" v-if="loaderVisible"></div>
+
 </template>
 <style lang="scss" scoped>
 .all-developers{
@@ -114,4 +120,31 @@ export default{
   }
 
 }
+
+.loader {
+   position: fixed;
+   top: 50%;
+   right: 49%;
+   transform: translateX(-50%);
+   width:50px;
+   height:50px;
+   border-radius:100%;
+   border:5px solid;
+   border-top-color:rgba(254, 168, 23, 0.65);
+   border-bottom-color:rgba(57, 154, 219, 0.65);
+   border-left-color:rgba(188, 84, 93, 0.95);
+   border-right-color:rgba(137, 188, 79, 0.95);
+   -webkit-animation: loading 1s ease-in-out infinite alternate;
+   animation: loading 1s ease-in-out infinite alternate;
+  }
+
+  @keyframes loading {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(720deg);}
+  }
+
+  @-webkit-keyframes loading {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(720deg);}
+  }
 </style>
