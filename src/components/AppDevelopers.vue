@@ -63,7 +63,7 @@ export default{
 
     checkSponsor(){
       this.length_object = Object.keys(this.developers.sponsor).length;
-      console.log(this.length_object)
+      // console.log(this.length_object)
       if(this.length_object > 0){
         this.isSponsored = true;
       } else {
