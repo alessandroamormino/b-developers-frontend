@@ -61,27 +61,29 @@ export default{
 }
 </script>
 <template>
-  <AppHeader></AppHeader>
+  <AppHeader :skills="this.skills"></AppHeader>
+
+  <div id="companies">
+    <div class="container">
+      <ul>
+        <li>
+          <img class="company" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1280px-Google_2015_logo.svg.png" alt="google">
+        </li>
+        <li>
+          <img class="company" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1597px-Netflix_2015_logo.svg.png" alt="netflix">
+        </li>
+        <li>
+          <img class="company" src="https://logolook.net/wp-content/uploads/2021/06/Paypal-Logo-2007.png" alt="paypal">
+        </li>
+        <li>
+          <img class="company" src="https://th.bing.com/th/id/OIP.0hq62bdD9-fLp_GDPz-k4wHaBf?pid=ImgDet&rs=1" alt="meta">
+        </li>
+      </ul>
+    </div>
+  </div>
+
   <div class="container my-4">
-    <h1>Sviluppatori</h1>
-    <form id="search" @submit.prevent="" action="">
-      <!-- <label for="skillInput" class="form-label">Ricerca per specializzazione</label>
-      <input v-model="this.selectedSkill" class="form-control" list="skillList" id="skillInput" @change="getDevelopers()" placeholder="Nome Specializzazione...">
-      <datalist id="skillList">
-        <option value="">Tutte</option>
-        <option v-for="skill in this.skills " :value="skill.name">{{ skill.name }}</option>
-      </datalist> -->
-
-      <label>Ricerca per specializzazione</label>
-      <select v-model="this.store.selectedSkill" id="skill_id" name="skill_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
-        <option selected value="">Tutte le specializzazioni</option>
-        <option v-for="skill in this.skills" :value="skill.id">{{ skill.name }}</option>
-      </select>
-      
-      <router-link :to="{name:'search' }" type="submit" class="btn btn-primary" @click="this.getSkillName()">CERCA</router-link>
-
-    </form>
-    
+    <h1>Sviluppatori</h1>    
 
     <div v-if="this.isDeveloperFound" class="container all-developers">
       <h2 class="w-100">In evidenza</h2>
@@ -99,26 +101,45 @@ export default{
 
 </template>
 <style lang="scss" scoped>
+
+#companies {
+  height: 100px;
+  background-color: #fafafa;
+
+  .container {
+    height: 100%;
+
+    ul {
+      display: flex;
+      gap: 2em;
+      margin-bottom: 0;
+    }
+  }
+
+  li {
+    list-style-type: none;
+    height: 50px;
+    .company {
+    object-fit: contain;
+    width: 100px;
+    height: 100%;
+
+    filter: grayscale(100%);
+  }
+  }
+
+
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
 .all-developers{
   display: flex;
   flex-flow: row wrap;
   gap: 2em;
-}
-
-#search{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1em;
-  // flex
-
-  padding: 2em 0;
-
-  .form-label{
-    margin: 0;
-    min-width: fit-content;
-  }
-
 }
 
 .loader {
