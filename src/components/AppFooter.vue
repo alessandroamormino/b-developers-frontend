@@ -91,59 +91,54 @@ export default {
           </section>
           <!-- Links -->
         <!-- Section: Social media -->
-        <section class="my-5">
+        <section class="my-5" id="footer-icons">
           <!-- Facebook -->
-          <a
+          <span
             class="btn text-white btn-floating m-1"
             style="background-color: #3b5998;"
-            href="#!"
             role="button"
             ><i class="fab fa-facebook-f"></i
-          ></a>
+          ></span>
 
           <!-- Twitter -->
-          <a
+          <span
             class="btn text-white btn-floating m-1"
             style="background-color: #55acee;"
-            href="#!"
             role="button"
             ><i class="fab fa-twitter"></i
-          ></a>
+          ></span>
 
           <!-- Google -->
-          <a
+          <span
             class="btn text-white btn-floating m-1"
             style="background-color: #dd4b39;"
-            href="#!"
             role="button"
             ><i class="fab fa-google"></i
-          ></a>
+          ></span>
 
           <!-- Instagram -->
-          <a
+          <span
             class="btn text-white btn-floating m-1"
             style="background-color: #ac2bac;"
-            href="#!"
             role="button"
             ><i class="fab fa-instagram"></i
-          ></a>
+          ></span>
 
           <!-- Linkedin -->
-          <a
+          <span
             class="btn text-white btn-floating m-1"
             style="background-color: #0082ca;"
-            href="#!"
+            href=""
             role="button"
             ><i class="fab fa-linkedin-in"></i
-          ></a>
+          ></span>
           <!-- Github -->
-          <a
+          <span
             class="btn text-white btn-floating m-1"
             style="background-color: #333333;"
-            href="#!"
             role="button"
             ><i class="fab fa-github"></i
-          ></a>
+          ></span>
         </section>
         <!-- Section: Social media -->
       </div>
@@ -152,13 +147,42 @@ export default {
       
 
       <!-- Copyright -->
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); color:#333333">
+      <div class="text-center p-3" id="footer-bottom">
         © 2023 Copyright:
-        <a style="color:#333333" href="https://booleaners#88-Team1">Team 1</a>
+        <span>Team 1</span>
       </div>
       <!-- Copyright -->
     </footer>
 
 </template>
 <style lang="scss" scoped>
+#footer-bottom {
+  background-color: rgb(20, 110, 190);
+  color:white;
+
+  span {
+    color:white;
+    text-decoration: none;
+
+    &:hover {
+      cursor: pointer;
+      color: blueviolet;
+    }
+
+  }
+}
+
+#footer-icons {
+  
+  span {
+    transition: none;
+    -webkit-transition: all .4s ease;
+
+    &:hover {
+      transform: scale(1.2);
+      transition: none;
+      -webkit-transition: all .4s ease;
+    }
+  }
+}
 </style>
