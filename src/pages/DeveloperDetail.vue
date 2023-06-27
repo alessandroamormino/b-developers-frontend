@@ -230,69 +230,110 @@ export default{
 };
 </script>
 <template>
-    <div class="container">
-      <h1 class="py-5">Dettagli Sviluppatore</h1>
+  <div class=" big-container container d-flex">
 
-      <div v-if="this.isDeveloperFound" class="developer-detail">
-          <h3 class="mb-3">{{ this.developer.user.name }} {{ this.developer.last_name }}</h3>
-          <img id="dev-picture" :src="getDevPicture" alt="developer-img">
-          <div v-if="this.developer.ratings.length > 0" class="stars">
-              <i v-for="star in this.getFullStars(this.ratingAVG)" class="fa-solid fa-star"></i><i v-for="halfStar in this.getHalfStars(this.ratingAVG)" class="fa-solid fa-star-half-stroke"></i><i v-for="star in this.getRemainingStars(this.ratingAVG)" class="fa-regular fa-star "></i> <span> ( Voti Totali: {{ this.developer.ratings.length}} )</span>
+      <section class="card-section gradient-custom-2" v-if="this.isDeveloperFound">
+        <div class="container py-5 h-100">
+          <div class="row developer-card d-flex align-items-center h-100">
+            <div class="col col-lg-9 col-xl-7 w-100 h-100">
+
+              <div class="card w-100 h-100">
+                <div class="rounded-top text-white d-flex flex-row" style="background-color: #146ebe; height:200px;">
+                  <div class="d-flex p-2 flex-grow-1">
+                    <img id="dev-picture" :src="getDevPicture" alt="Generic placeholder image" class="img-fluid img-thumbnail ">
+                  </div>
+                  <div id="user-header" class="d-flex flex-column gap-3 align-items-center justify-content-center h-100 w-25">
+                    <div class="d-flex flex-column align-items-center">
+                      <h3>{{ this.developer.user.name }} {{ this.developer.last_name }}</h3>
+                      <div v-if="this.developer.ratings.length > 0" class="stars h-100">
+                        <i v-for="star in this.getFullStars(this.ratingAVG)" class="fa-solid fa-star"></i><i v-for="halfStar in this.getHalfStars(this.ratingAVG)" class="fa-solid fa-star-half-stroke"></i><i v-for="star in this.getRemainingStars(this.ratingAVG)" class="fa-regular fa-star "></i> 
+                      </div>
+                    </div>
+                    <div class="px-2 d-flex flex-column align-items-center">
+                      <p class="mb-1 h5">{{ this.developer.ratings.length}} </p>
+                      <p class="small mb-0 text-white">Voti</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body text-black">
+                  <div class="mb-2 w-100">
+                    <div class="p-2" style="background-color: #f8f9fa;">
+                      <p class="box-title">Informazioni</p>
+                      <p><strong>Indirizzo:</strong> {{ this.developer.address }}</p>
+                      <p><strong>Telefono:</strong> {{ this.developer.phone }}</p>
+                      <p><strong>Titolo:</strong> {{ this.developer.role }}</p>
+                      <p><strong>Prestazioni:</strong> {{ this.developer.services }}</p>
+                    </div>
+                  </div>
+
+                  <div class="mb-2 w-100">
+                    <div class="p-2" style="background-color: #f8f9fa;">
+                      <div class="icons d-flex align-items-center">
+                        <p class="box-title">Specializzazioni</p>
+                        <img class="skill-icon" v-for="icon in getSkillsIcons" :src="this.store.URI + 'storage/' + icon" alt="">
+                    </div>
+                  </div>
+
+                  <div class="mt-2 w-100">
+                    <div class="p-2" style="background-color: #f8f9fa;">
+                      <div class="icons d-flex align-items-center h-100">
+                        <p class="box-title">Curriculum</p>
+                        <img id="dev-curriculum" :src="getDevCV" alt="developer-cv">
+                      </div>
+                    </div>
+                  </div>
+
+                  </div>
+              
+                </div>
+              </div>
+            </div>
           </div>
-          <hr>
-          <div class="info">
-            <h4>Informazioni</h4>
-            <p><strong>Indirizzo:</strong> {{ this.developer.address }}</p>
-            <p><strong>Telefono:</strong> {{ this.developer.phone }}</p>
-            <p><strong>Titolo:</strong> {{ this.developer.role }}</p>
-            <p><strong>Prestazioni:</strong> {{ this.developer.services }}</p>
-          </div>
-          <hr>
-          <h4>Specializzazioni</h4>
-          <div class="icons">
-              <img class="skill-icon" v-for="icon in getSkillsIcons" :src="this.store.URI + 'storage/' + icon" alt="">
-          </div>
-          <hr>
-          <h4>Curriculum</h4>
-          <img id="dev-curriculum" :src="getDevCV" alt="developer-cv">
-      </div>
+        </div>
+      </section>
+
       <div v-else class="alert alert-warning">
           <p>Lo sviluppatore non è stato trovato</p>
       </div>
       <hr>
 
-      <div class="ratings-form">
-        <h4>Dai un voto a <span>{{this.completeName}}</span></h4>
-
-        <!-- <i v-for="(star, index) in 5" class="fa-regular fa-star" @mouseover="colorStars(index)"></i> -->
-        <!-- <star-rating v-model:rating="rating"></star-rating> -->
-        <star-rating :rounded-corners="true" :border-width="3" :rating="1" v-model:rating="this.revRate" @click="sendRate()" :star-size="25" active-color="#ff0201" border-color="##ff0201" ></star-rating>
-      </div>
-
-      <hr>
-
-      <div class="reviews-form">
-        <h4>Lascia una tua recensione</h4>
-        <form @submit.prevent="sendReview()" method="POST">
-          <div class="mb-3 info-user">
-            <label for="name" class="form-label"> Inserisci il tuo nome completo*</label>
-            <input type="text" id="name" name="name" v-model="this.revName" class="form-control" required>
-          </div>
-          <!-- <div class="mb-3 ratings">
-            <label for="rating" class="form-label">Dai un voto da 1 a 5</label>
-            <input type="number" min="1" max="5" v-model="this.revRate" class="form-control">
-          </div> -->
-          <div class="mb-3 content">
-            <label for="content" class="form-label">Inserisci il tuo commento*</label>
-            <textarea name="content" id="content" cols="30" rows="10" v-model="this.revContent" class="form-control" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Invia</button>
-        </form>
-        <div class="disclaimer mt-3">
-         <em>I campi indicati con * sono obbligatori per l'invio della recensione.</em>
+      <div class="form-section py-5">
+        <div class="ratings-form">
+          <h4>Dai un voto a <span>{{this.completeName}}</span></h4>
+  
+          <!-- <i v-for="(star, index) in 5" class="fa-regular fa-star" @mouseover="colorStars(index)"></i> -->
+          <!-- <star-rating v-model:rating="rating"></star-rating> -->
+          <star-rating :rounded-corners="true" :border-width="3" :rating="1" v-model:rating="this.revRate" @click="sendRate()" :star-size="25" active-color="#ff0201" border-color="##ff0201" ></star-rating>
         </div>
+  
+        <hr>
+  
+        <div class="reviews-form">
+          <h4>Lascia una tua recensione</h4>
+          <form @submit.prevent="sendReview()" method="POST">
+            <div class="mb-3 info-user">
+              <label for="name" class="form-label"> Inserisci il tuo nome completo*</label>
+              <input type="text" id="name" name="name" v-model="this.revName" class="form-control" required>
+            </div>
+            <!-- <div class="mb-3 ratings">
+              <label for="rating" class="form-label">Dai un voto da 1 a 5</label>
+              <input type="number" min="1" max="5" v-model="this.revRate" class="form-control">
+            </div> -->
+            <div class="mb-3 content">
+              <label for="content" class="form-label">Inserisci il tuo commento*</label>
+              <textarea name="content" id="content" cols="30" rows="10" v-model="this.revContent" class="form-control" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Invia</button>
+          </form>
+          <div class="disclaimer mt-3">
+            <em>I campi indicati con * sono obbligatori per l'invio della recensione.</em>
+          </div>
+        </div>
+        
       </div>
     </div>
+
+ 
 
     <!-- Messaggi -->
     
@@ -354,8 +395,36 @@ export default{
 
 
 <style lang="scss" scoped>
+.big-container {
+  padding-top: 60px;
+  width: 100%;
+  gap: 20px;
+  .card-section {
+    max-height: 800px;
+    width: 80%;
+    .developer-card {
+      width: 100%;
+      
+      #dev-picture {
+          width: 180px;
+          height: 180px;
+          object-fit: cover;
+          margin-top: 30px;
 
-.developer-detail {
+          z-index: 1;
+
+      }
+      .box-title {
+        font-size: 1.2em;
+        margin-bottom: 0;
+      }
+    }
+  }
+  
+}
+
+#developer-detail {
+  border: 1px solid rgba(0, 0, 0, 0.267);
     h3 {
         text-transform: capitalize;
     }
@@ -366,14 +435,6 @@ export default{
     }
 }
 
-#dev-picture {
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-    margin: 2em 0;
-
-    border-radius: 50%;
-}
 
 #dev-curriculum {
   width: 350px;
