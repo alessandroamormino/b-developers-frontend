@@ -247,7 +247,7 @@ export default{
         <h4>Lascia una tua recensione</h4>
         <form @submit.prevent="sendReview()" method="POST">
           <div class="mb-3 info-user">
-            <label for="name" class="form-label"> Inserisci il tuo nome completo</label>
+            <label for="name" class="form-label"> Inserisci il tuo nome completo*</label>
             <input type="text" id="name" name="name" v-model="this.revName" class="form-control" required>
           </div>
           <!-- <div class="mb-3 ratings">
@@ -255,11 +255,14 @@ export default{
             <input type="number" min="1" max="5" v-model="this.revRate" class="form-control">
           </div> -->
           <div class="mb-3 content">
-            <label for="content" class="form-label">Inserisci il tuo commento</label>
+            <label for="content" class="form-label">Inserisci il tuo commento*</label>
             <textarea name="content" id="content" cols="30" rows="10" v-model="this.revContent" class="form-control" required></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Invia</button>
         </form>
+        <div class="disclaimer mt-3">
+         <em>I campi indicati con * sono obbligatori per l'invio della recensione.</em>
+        </div>
       </div>
     </div>
 
