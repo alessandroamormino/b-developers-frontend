@@ -266,7 +266,7 @@ export default{
 
         <!-- <i v-for="(star, index) in 5" class="fa-regular fa-star" @mouseover="colorStars(index)"></i> -->
         <!-- <star-rating v-model:rating="rating"></star-rating> -->
-        <star-rating :rounded-corners="true" :border-width="3" :rating="1" v-model:rating="this.revRate" @click="sendRate()" :star-size="25" active-color="#ffe030" border-color="#999" ></star-rating>
+        <star-rating :rounded-corners="true" :border-width="3" :rating="1" v-model:rating="this.revRate" @click="sendRate()" :star-size="25" active-color="#ff0201" border-color="##ff0201" ></star-rating>
       </div>
 
       <hr>
@@ -402,7 +402,7 @@ export default{
   .stars {
     .fa-solid.fa-star,
     .fa-solid.fa-star-half-stroke {
-      color: #ebd247e3;
+      color: red;
     }
     .fa-regular.fa-star {
       color: #b4b3b3;
