@@ -247,7 +247,7 @@ export default{
         <h4>Lascia una tua recensione</h4>
         <form @submit.prevent="sendReview()" method="POST">
           <div class="mb-3 info-user">
-            <label for="name" class="form-label">Inserisci il tuo nome completo</label>
+            <label for="name" class="form-label"> Inserisci il tuo nome completo</label>
             <input type="text" id="name" name="name" v-model="this.revName" class="form-control" required>
           </div>
           <!-- <div class="mb-3 ratings">
@@ -274,15 +274,15 @@ export default{
       <form @submit.prevent="sendMessage()" method="POST">
         <!-- name 	email 	subject 	meeting_date 	content -->
         <div class="mb-3 info-user">
-          <label for="name" class="form-label">Inserisci il tuo nome completo</label>
+          <label for="name" class="form-label">Inserisci il tuo nome completo*</label>
           <input type="text" id="name" name="name" v-model="this.messageName" class="form-control" max="255" required>
         </div>
         <div class="mb-3 info-mail">
-          <label for="email" class="form-label">Inserisci la tua mail</label>
+          <label for="email" class="form-label">Inserisci la tua mail*</label>
           <input type="email" id="email" name="email" v-model="this.messageEmail" class="form-control" required>
         </div>
         <div class="mb-3 subject">
-          <label for="subject" class="form-label">Oggetto</label>
+          <label for="subject" class="form-label">Oggetto*</label>
           <input type="text" id="subject" name="subject" v-model="this.messageSubject" class="form-control" required>
         </div>
         <div class="mb-3 date">
@@ -290,11 +290,14 @@ export default{
           <input type="datetime-local" id="meeting_date" name="meeting_date" v-model="this.messageDate" class="form-control">
         </div>
         <div class="mb-3 content">
-          <label for="content" class="form-label">Inserisci il tuo messaggio</label>
+          <label for="content" class="form-label">Inserisci il tuo messaggio*</label>
           <textarea name="content" id="content" cols="30" rows="10" v-model="this.messageContent" class="form-control" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Invia</button>
       </form>
+      <div class="disclaimer mt-3">
+        <em>I campi indicati con * sono obbligatori.</em>
+      </div>
     </div>
 
     
