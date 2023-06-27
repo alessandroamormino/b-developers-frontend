@@ -275,7 +275,7 @@ export default{
         <!-- name 	email 	subject 	meeting_date 	content -->
         <div class="mb-3 info-user">
           <label for="name" class="form-label">Inserisci il tuo nome completo</label>
-          <input type="text" id="name" name="name" v-model="this.messageName" class="form-control" required>
+          <input type="text" id="name" name="name" v-model="this.messageName" class="form-control" max="255" required>
         </div>
         <div class="mb-3 info-mail">
           <label for="email" class="form-label">Inserisci la tua mail</label>
@@ -286,7 +286,7 @@ export default{
           <input type="text" id="subject" name="subject" v-model="this.messageSubject" class="form-control" required>
         </div>
         <div class="mb-3 date">
-          <label for="meeting_date" class="form-label">Oggetto</label>
+          <label for="meeting_date" class="form-label">Data Appuntamento</label>
           <input type="datetime-local" id="meeting_date" name="meeting_date" v-model="this.messageDate" class="form-control" required>
         </div>
         <div class="mb-3 content">
