@@ -16,10 +16,10 @@ export default{
         isDeveloperFound: false,
         store,
         selectedRevs: '1',
-        sponsoredDevs: [],
-        sponsoredDevs2: [],
-        notSponsoredDevs: [],
-        orderedDevs: [],
+        // sponsoredDevs: [],
+        // sponsoredDevs2: [],
+        // notSponsoredDevs: [],
+        // orderedDevs: [],
       };
 
   },
@@ -31,7 +31,7 @@ export default{
     axios.get(this.store.apiURLsearch + this.store.selectedSkill + '&avg=' + this.selectedAVG + '&numRevs=' + this.selectedRevs).then(response => {
       if(response.data.success) {
         this.developers = response.data.results;
-        console.log(this.developers);
+        // console.log(this.developers);
         
 
         // const m = new Date();

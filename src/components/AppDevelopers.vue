@@ -12,7 +12,7 @@ export default{
       fullStars: '',
       halfStars: '',
       remainingStars: '',
-
+      isSponsored: false,
     }
   }, 
   props: {
@@ -42,17 +42,7 @@ export default{
 
     // funzioni per il calcolo delle stelle per i voti 
     getRatingAVG() {
-      // let sum = 0; 
-      // for(let i=0; i < this.developers.ratings.length; i++){
-      //   sum += this.developers.ratings[i].rating; 
-      // }
-      // console.log(this.developers);
-      // if(this.developers.ratings.length == 0){
-      //   return this.ratingAVG = 0;
-      // }
-      // return this.ratingAVG = sum / this.developers.ratings.length;
       this.ratingAVG = this.developers.ratingAVG;
-      // console.log(this.ratingAVG);
     },
 
     getFullStars(avg) {
@@ -70,17 +60,25 @@ export default{
       return this.remainingStars = 5 - (this.getFullStars(avg) + Math.round(this.getHalfStars(avg)));
     },
 
-    // ////
-
+    checkSponsor(){
+      if(this.developers.sponsor.length > 0){
+        this.isSponsored = true;
+      } else {
+        this.isSponsored = false;
+      }
+    }
 
   },
   
   mounted() {
     this.getRatingAVG();
+    this.checkSponsor();
   }, 
 
   updated(){
     this.getRatingAVG();
+    this.checkSponsor();
+
   }
   
 }
@@ -88,7 +86,7 @@ export default{
 <template>
   <div class="card" style="width: 18rem;">
     <img id="profile-pic" class="card-img-top" :src="picture" alt="profile-picture">
-    <div class="card-body p-0 d-flex flex-column">
+    <div class="card-body p-0 d-flex flex-column" :class="this.isSponsored ? 'sponsored' : ''">
       <h5 class="card-title px-3">{{ developers.user.name + ' ' + developers.last_name }}</h5>
       <div v-if="this.developers.ratings.length > 0" class="stars px-3">
         <i v-for="star in this.getFullStars(this.ratingAVG)" class="fa-solid fa-star"></i><i v-for="halfStar in this.getHalfStars(this.ratingAVG)" class="fa-solid fa-star-half-stroke"></i><i v-for="star in this.getRemainingStars(this.ratingAVG)" class="fa-regular fa-star "></i> <span> (Voti Totali: {{ this.developers.ratings.length}} )</span>
@@ -126,6 +124,9 @@ export default{
     h5 {
       margin-top: 1em;
       text-transform: capitalize;
+    }
+    &.sponsored{
+      background-color: #fff09c;
     }
   }
 
