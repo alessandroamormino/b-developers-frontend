@@ -85,12 +85,12 @@ export default{
 
   getSkillName(){
     for (let i = 0; i < this.skills.length; i++) {
-        
-        if(this.skills[i].id == this.store.selectedSkill){
 
-            this.store.skillName =  this.skills[i].name;        
+        if(this.skills[i].id == this.store.selectedSkill){
+            this.store.skillName = this.skills[i].name;        
         }
     }
+
 
   },
 
@@ -136,7 +136,8 @@ export default{
 
     </form>
 
-    <span>Risultati per ricerca: {{ this.store.skillName }}</span>
+    <span v-if="this.store.selectedSkill != ''">Risultati per ricerca: {{ this.store.skillName }}</span>
+    <span v-else>Risultati per: Tutte le specializzazioni</span>
     
 
     <div v-if="this.isDeveloperFound" class="container all-developers">
