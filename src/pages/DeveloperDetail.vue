@@ -230,7 +230,7 @@ export default{
 
               <div class="card w-100 h-100">
                 <div class="rounded-top text-white d-flex flex-row" style="background-color: #146ebe; height:200px;">
-                  <div class="d-flex p-2 flex-grow-1">
+                  <div class="profile-image d-flex p-2 flex-grow-1">
                     <img id="dev-picture" :src="getDevPicture" alt="Generic placeholder image" class="img-fluid img-thumbnail ">
                   </div>
                   <div id="user-header" class="d-flex flex-column gap-3 align-items-center justify-content-center h-100 w-25">
@@ -415,7 +415,6 @@ export default{
             padding: 0;
           }
         }
-
       }
 
     }
@@ -596,5 +595,56 @@ export default{
       width: 30%;
     }
   }
+
+
+
+// *******************************************
+//                  RESPONSIVE
+// *******************************************
+@media only screen and (max-width: 576px){
+  .big-container{
+    flex-flow: column;
+    gap: 0;
+    .card-section{
+      width: 100%;
+      .container{
+        display: flex;    
+        justify-content: center;
+      }
+
+      .developer-card {
+      width: 100%;
+      
+      #dev-picture {
+        width: 150px; 
+        height: 150px;
+        object-fit: cover;
+        margin-top: 15px;
+        margin-left: 15px;
+      }
+      .box-title {
+        font-size: 1.2em;
+        margin-bottom: 0;
+      }
+
+      .card {
+        perspective: 2000px;
+
+        #card-inner {
+          padding-top: 10px;
+          // position: relative;
+          width: 100%;
+          height: 100%;
+
+          .card-body {
+            padding: 0;
+          }
+        }
+      }
+
+    }
+    }
+  }
+}
 
 </style>
