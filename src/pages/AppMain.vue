@@ -8,6 +8,7 @@ import AppDevelopers from '../components/AppDevelopers.vue';
 import AppSponsor from '../components/AppSponsor.vue';
 import AppHeader from '../components/AppHeader.vue';
 import AppCategories from '../components/AppCategories.vue';
+import AppSection from '../components/AppSection.vue';
 
 
 export default{
@@ -23,7 +24,7 @@ export default{
 
       };
   },
-  components: { AppDevelopers, AppHeader, AppSponsor, AppCategories }, 
+  components: { AppDevelopers, AppHeader, AppSponsor, AppCategories, AppSection }, 
 
   methods: {
   getDevelopers(){
@@ -103,6 +104,7 @@ export default{
 
   <div class="loader" v-if="loaderVisible"></div>
 
+  <AppSection></AppSection>
   <AppCategories></AppCategories>
 </template>
 <style lang="scss" scoped>

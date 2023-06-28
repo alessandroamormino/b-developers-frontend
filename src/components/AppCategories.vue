@@ -10,7 +10,7 @@ export default {
 <template>
     <section>
         <div class="container p-4 pb-0 mt-5">
-            <h3 id="section-title">Lo cerchi, lo abbiamo</h3>
+            <h3 id="section-title">Lo cerchi, lo abbiamo.</h3>
             <div id="section-container">
                 <div class="single-category">
                     <img src="img/graphics.png" alt="category-icon">
@@ -59,14 +59,14 @@ export default {
 </template>
 <style lang="scss" scoped>
 section {
-    margin: 80px auto;
+    margin: 0 auto 80px;
     font-family: 'Montserrat', sans-serif;
 
 
     #section-title {
         color: rgb(20, 110, 190);
-        font-size: 2.2rem;
-        font-weight: bold;
+        font-size: 2.5rem;
+        letter-spacing: 2px;
     }
 
     #section-container {
