@@ -42,8 +42,6 @@ export default{
         reviewSent: false,
         reviewFailed: false,
 
-        isNotFlipped: false,
-
       };
 
   },
@@ -53,11 +51,6 @@ export default{
   },
 
   methods: {
-
-    //close(el) {
-   //   this.isMessageVisible = false;
-    //},
-
 
     getDevelopers() {
       this.loaderVisible = true;
@@ -76,11 +69,6 @@ export default{
     },
 
     getRatingAVG() {
-      // let sum = 0; 
-      // for(let i=0; i < this.developer.ratings.length; i++){
-      //   sum += this.developer.ratings[i].rating; 
-      // }
-      //  return this.ratingAVG = sum / this.developer.ratings.length;
       this.ratingAVG = this.developer.ratingAVG;
     },
 
@@ -199,10 +187,6 @@ export default{
       this.isMessageVisible = false;
     },
 
-    showCV() {
-      this.isNotFlipped = !this.isNotFlipped;
-    }
-
 
   },
 
@@ -237,7 +221,7 @@ export default{
 };
 </script>
 <template>
-  <div class=" big-container container d-flex">
+  <div class=" big-container container d-flex my-5">
 
       <section class="card-section gradient-custom-2" v-if="this.isDeveloperFound">
         <div class="container py-5 h-100">
@@ -263,11 +247,11 @@ export default{
                   </div>
                 </div>
 
-                <div id="card-inner" :class="this.isNotFlipped ? 'flip' : ''">
+                <div id="card-inner" class="p-2">
                   <div class="card-body text-black">
   
-                    <div class="mb-2 w-100">
-                      <div class="p-2" style="background-color: #f8f9fa;">
+                    <div class="my-2 w-100">
+                      <div class="p-2">
                         <p class="box-title">Informazioni</p>
                         <p><strong>Indirizzo:</strong> {{ this.developer.address }}</p>
                         <p><strong>Telefono:</strong> {{ this.developer.phone }}</p>
@@ -275,31 +259,13 @@ export default{
                         <p><strong>Prestazioni:</strong> {{ this.developer.services }}</p>
                       </div>
                     </div>
-  
-                    <div class="mb-2 w-100">
-                      <div class="p-2" style="background-color: #f8f9fa;">
-                        <div class="icons d-flex align-items-center">
-                          <p class="box-title">Specializzazioni</p>
-                          <img class="skill-icon" v-for="icon in getSkillsIcons" :src="this.store.URI + 'storage/' + icon" alt="">
+                    <hr>
+                    <div class="my-2 w-100">
+                      <div class="icons d-flex align-items-center">
+                        <p class="box-title">Specializzazioni</p>
+                        <img class="skill-icon" v-for="icon in getSkillsIcons" :src="this.store.URI + 'storage/' + icon" alt="">
                       </div>
                     </div>
-  
-                    <div class="mt-2 w-100">
-                      <div class="p-2" style="background-color: #f8f9fa;">
-                        <div class="icons d-flex align-items-center h-100">
-                          <p class="box-title">Curriculum</p>
-                          <a @click="showCV()" id="cv-link" href="#">Visualizza</a>
-                        </div>
-                      </div>
-                    </div>
-  
-                    </div>
-                
-                  </div>
-
-                  <div id="cv-container" class="d-flex flex-column">
-                    <img id="dev-curriculum" :src="getDevCV" alt="developer-cv">
-                    <button @click="showCV()" class="btn btn primary">Torna ai dettagli</button>
                   </div>
                 </div>
 
@@ -317,11 +283,17 @@ export default{
       <hr>
 
       <div class="form-section py-5">
-        <div class="ratings-form">
+        <div id="cv-container">
+          <img id="dev-curriculum" :src="getDevCV" alt="developer-cv">
+        </div>
+        
+        
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="ratings-form">
           <h4>Dai un voto a <span>{{this.completeName}}</span></h4>
-  
-          <!-- <i v-for="(star, index) in 5" class="fa-regular fa-star" @mouseover="colorStars(index)"></i> -->
-          <!-- <star-rating v-model:rating="rating"></star-rating> -->
           <star-rating :rounded-corners="true" :border-width="3" :rating="1" v-model:rating="this.revRate" @click="sendRate()" :star-size="25" active-color="#ff0201" border-color="##ff0201" ></star-rating>
         </div>
   
@@ -334,10 +306,6 @@ export default{
               <label for="name" class="form-label"> Inserisci il tuo nome completo*</label>
               <input type="text" id="name" name="name" v-model="this.revName" class="form-control" required>
             </div>
-            <!-- <div class="mb-3 ratings">
-              <label for="rating" class="form-label">Dai un voto da 1 a 5</label>
-              <input type="number" min="1" max="5" v-model="this.revRate" class="form-control">
-            </div> -->
             <div class="mb-3 content">
               <label for="content" class="form-label">Inserisci il tuo commento*</label>
               <textarea name="content" id="content" cols="30" rows="10" v-model="this.revContent" class="form-control" required></textarea>
@@ -348,8 +316,6 @@ export default{
             <em>I campi indicati con * sono obbligatori per l'invio della recensione.</em>
           </div>
         </div>
-        
-      </div>
     </div>
 
  
@@ -408,8 +374,6 @@ export default{
     <div class="my-alert" v-if="reviewFailed">Recensione non inviata<button @click="closeMessage()" class="btn btn-primary">Ok</button></div>
     <!-- /// -->
 
-    
-   
 </template>
 
 
@@ -427,13 +391,11 @@ export default{
       width: 100%;
       
       #dev-picture {
-          width: 180px;
-          height: 180px;
-          object-fit: cover;
-          margin-top: 30px;
-          margin-left: 30px;
-
-
+        width: 180px; 
+        height: 180px;
+        object-fit: cover;
+        margin-top: 30px;
+        margin-left: 30px;
       }
       .box-title {
         font-size: 1.2em;
@@ -445,33 +407,12 @@ export default{
 
         #card-inner {
           padding-top: 10px;
-          position: relative;
+          // position: relative;
           width: 100%;
           height: 100%;
-          transition: transform 0.8s;
-          
-          &.flip {
-            transform-style: preserve-3d;
-            transform: rotateY(-180deg);
-          }
 
           .card-body {
             padding: 0;
-          }
-          
-          .card-body, #cv-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-          }
-
-          #cv-container {
-            transform: rotateY(180deg);
-
-            #dev-curriculum {
-              width: 300px
-            }
           }
         }
 
@@ -480,6 +421,17 @@ export default{
     }
   }
   
+}
+
+#cv-container {
+  // transform: rotateY(180deg);
+
+  #dev-curriculum {
+    width: 500px;
+    height: 700px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
 }
 
 #developer-detail {

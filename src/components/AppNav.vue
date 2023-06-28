@@ -14,7 +14,7 @@ export default {
   <nav class="navbar navbar-expand-lg">
     <div class="container nav-container">
       <router-link :to="{name: 'main'}" class="nav-logo" aria-current="page">
-        <img src="img/logo.png" alt="">
+        <img src="img/logo.png" alt="logo">
       </router-link>    
       <div class="nav-links">
         <a href="http://127.0.0.1:8000/" class="btn btn-outline-light nav-btn">Area Riservata</a>
@@ -33,7 +33,7 @@ nav {
   top:0;
   right: 0;
 
-  z-index: 99;
+  z-index: 1;
 
   .nav-container {
     display: flex;
