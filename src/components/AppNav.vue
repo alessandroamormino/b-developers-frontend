@@ -17,7 +17,7 @@ export default {
         <img src="img/logo.png" alt="">
       </router-link>    
       <div class="nav-links">
-        <a href="http://127.0.0.1:8000/" class="btn btn-outline-light nav-btn">Crea il tuo profilo</a>
+        <a href="http://127.0.0.1:8000/" class="btn btn-outline-light nav-btn">Area Riservata</a>
       </div>
     </div>
   </nav>
@@ -26,10 +26,10 @@ export default {
 
 
 nav {
-  // background-color: #146ebe;
+  background-color: #166DBE;
   width: 100%;
   height: 105px;
-  position: absolute;
+  position: fixed;
   top:0;
   right: 0;
 

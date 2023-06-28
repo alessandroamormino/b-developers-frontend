@@ -59,9 +59,25 @@ export default{
 
   },
 
+  scrollFunction() {
+    let mybutton = document.querySelector("#myBtn");
+
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
+  },
+
+  topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+  },
+
   }, 
   created(){
     this.getDevelopers();
+    window.onscroll = () => {this.scrollFunction()};
   }, 
 }
 </script>
@@ -91,6 +107,7 @@ export default{
     <h1>Sviluppatori</h1>    
 
     <div v-if="this.isDeveloperFound" class="container all-developers">
+      <button @click="topFunction()" id="myBtn">&ShortUpArrow;</button>
       <h2 class="w-100">In evidenza</h2>
       <AppSponsor v-for="developer in this.sponsoredDevelopers" :developers="developer"></AppSponsor>
 
@@ -108,6 +125,30 @@ export default{
   <AppCategories></AppCategories>
 </template>
 <style lang="scss" scoped>
+
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+
+  z-index: 2;
+  font-size: 18px;
+  border: 1px solid #fff;
+
+  background-color: #166DBE;
+  color: #fff;
+
+  cursor: pointer;
+
+  padding: 10px;
+
+  font-size: 30px;
+}
 
 #companies {
   height: 100px;
