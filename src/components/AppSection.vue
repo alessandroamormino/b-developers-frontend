@@ -26,8 +26,15 @@ export default {
 .section-img {
     background-color: rgb(20, 110, 190);
 
-    img {
-        width: 100%;
+    .container{
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            width: 100%;
+        }
     }
 }
 
@@ -36,6 +43,18 @@ export default {
 }
 #bottom-svg{
     margin-top: -5px;
+}
+
+@media screen and (max-width: 576px) {
+    .section-img{
+        .container{
+
+            img{
+                scale: 1.1;
+            }
+        }
+    }
+    
 }
 
 </style>

@@ -211,6 +211,13 @@ export default {
         #jumbo-content{
           min-width: 500px;
         }
+
+        #jumbo-carousel{
+          .jumbo-images{
+            object-fit: cover;
+            object-position: right;
+          }
+        }
       }
   }
 
@@ -220,6 +227,13 @@ export default {
         #jumbo-content{
           min-width: 500px;
           left: 50%;
+        }
+
+        #jumbo-carousel{
+          .jumbo-images{
+            object-fit: cover;
+            object-position: 80%;
+          }
         }
       }
   }
@@ -248,6 +262,13 @@ export default {
               display: none;
             }
 
+          }
+        }
+
+        #jumbo-carousel{
+          .jumbo-images{
+            object-fit: cover;
+            object-position: 75%;
           }
         }
       }
