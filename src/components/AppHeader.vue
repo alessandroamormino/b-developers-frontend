@@ -125,7 +125,7 @@ export default {
       #jumbo-content {
         min-width: 800px;
         position: absolute;
-        top: 60%;
+        top: 50%;
         left: 35%;
         transform: translate(-50%, -50%);
 
