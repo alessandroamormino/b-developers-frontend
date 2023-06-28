@@ -180,7 +180,7 @@ export default{
 
 
 
-  @media only screen and (max-width: 576px) {
+  @media only screen and (max-width: 768px) {
     .container {
       h1 {
         text-align: center;

@@ -204,4 +204,11 @@ img{
     }
   }
 }
+
+
+@media only screen and (max-width: 768px) {
+  h6 {
+    justify-content: center;
+  }
+}
 </style>
