@@ -227,9 +227,12 @@ export default {
   @media screen and (max-width: 576px) {
       #jumbo{
 
+        height: 700px;
+
         #jumbo-content{
           min-width: 200px;
           left: 50%;
+          top: 45%;
 
           h1{
             font-size: 3em;
