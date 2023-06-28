@@ -21,11 +21,12 @@ export default {
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                   <!-- Content -->
                   <h6 class="text-uppercase fw-bold mb-4">
-                    <i class="fas fa-gem me-3"></i>Company name
+                    <img src="img/bdevelopers-website-favicon-black.png" alt=""> <span>BDevelopers</span>
                   </h6>
+                  
                   <p>
-                    Here you can use rows and columns to organize your footer content. Lorem ipsum
-                    dolor sit amet, consectetur adipisicing elit.
+                    Una soluzione fatta apposta per il business.
+                    Approfitta di un'esperienza curata per accedere a talenti selezionati e strumenti esclusivi.
                   </p>
                 </div>
                 <!-- Grid column -->
@@ -34,7 +35,7 @@ export default {
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                   <!-- Links -->
                   <h6 class="text-uppercase fw-bold mb-4">
-                    Products
+                    <i class="fa-solid fa-microchip"></i> <span class="footer-lil-title">Servizi</span>
                   </h6>
                   <p>
                     <a href="#!" class="text-reset">Angular</a>
@@ -55,19 +56,19 @@ export default {
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                   <!-- Links -->
                   <h6 class="text-uppercase fw-bold mb-4">
-                    Useful links
+                    <i class="fa-solid fa-link"></i> <span class="footer-lil-title">Link Utili</span>
                   </h6>
                   <p>
-                    <a href="#!" class="text-reset">Pricing</a>
+                    <a href="#!" class="text-reset">Prezzi</a>
                   </p>
                   <p>
-                    <a href="#!" class="text-reset">Settings</a>
+                    <a href="#!" class="text-reset">Impostazioni</a>
                   </p>
                   <p>
-                    <a href="#!" class="text-reset">Orders</a>
+                    <a href="#!" class="text-reset">Ordini</a>
                   </p>
                   <p>
-                    <a href="#!" class="text-reset">Help</a>
+                    <a href="#!" class="text-reset">Assistenza</a>
                   </p>
                 </div>
                 <!-- Grid column -->
@@ -75,14 +76,16 @@ export default {
                 <!-- Grid column -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                   <!-- Links -->
-                  <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                  <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+                  <h6 class="text-uppercase fw-bold mb-4">
+                    <i class="fa-regular fa-address-card"></i> <span class="footer-lil-title">Contatti</span>
+                  </h6>
+                  <p><i class="fas fa-home me-3"></i> Vle Cassala 22 Milano Lombardia</p>
                   <p>
                     <i class="fas fa-envelope me-3"></i>
-                    info@example.com
+                    BDevelopers@email.it
                   </p>
-                  <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-                  <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                  <p><i class="fas fa-phone me-3"></i> + 02 367 890 22</p>
+                  <p><i class="fas fa-print me-3"></i> + 02 690 582 37</p>
                 </div>
                 <!-- Grid column -->
               </div>
@@ -156,6 +159,8 @@ export default {
 
 </template>
 <style lang="scss" scoped>
+
+
 #footer-bottom {
   background-color: rgb(20, 110, 190);
   color:white;
@@ -170,6 +175,20 @@ export default {
     }
 
   }
+}
+
+h6 {
+  display: flex;
+  align-items: center;
+}
+
+img{
+  width: 8%;
+  margin-right: 5px;
+}
+
+.footer-lil-title {
+  margin-left: 10px;
 }
 
 #footer-icons {
