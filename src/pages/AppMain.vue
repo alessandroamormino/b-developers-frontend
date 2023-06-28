@@ -134,6 +134,7 @@ export default{
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  
 
   z-index: 2;
   font-size: 18px;
@@ -217,10 +218,23 @@ export default{
   }
 
 
-  @media screen and (max-width: 768){
+  @media screen and (max-width: 576px) {
 
+    #companies{
+
+      li{
+        .company{
+          width: 60px;
+        }
+      }
+    }
+
+    #myBtn{
+      width: 50px;
+      height: 50px;
+      font-size: 18px;
+    }
     
-    
-       
   }
+
 </style>

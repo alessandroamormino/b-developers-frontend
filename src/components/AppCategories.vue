@@ -34,7 +34,7 @@ export default {
                 </div>
                 <div class="single-category">
                     <img src="public/img/programming.png" alt="category-icon">
-                    <span>Programmazione & Tech</span>
+                    <span>Programmazione <br> & Tech</span>
                 </div>
                 <div class="single-category">
                     <img src="public/img/business.png" alt="category-icon">
@@ -72,6 +72,7 @@ section {
     #section-container {
         display: flex;
         flex-flow: row wrap;
+        align-items: center;
         padding: 30px;
 
         .single-category {
@@ -93,6 +94,7 @@ section {
             span {
                 position: relative;
                 font-weight: 500;
+                text-align: center;
 
                 &::before {
                     content: "";
@@ -116,6 +118,41 @@ section {
                     background-color:rgb(20, 110, 190);
                     transition: all .4s ease;
                     -webkit-transition: all .4s ease;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    section{
+
+        #section-container{
+            .single-category{
+                width: calc(100% / 2);
+                margin: 40px auto 20px;
+
+                img{
+                    width: 15%;
+                }
+            }
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 576px) {
+    section{
+
+        #section-container{
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            .single-category{
+
+                img{
+                    width: 30%;
                 }
             }
         }
