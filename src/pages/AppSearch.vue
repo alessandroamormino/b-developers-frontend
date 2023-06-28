@@ -70,7 +70,7 @@ export default{
   <div class="container my-2">
     <h1>Tutti gli sviluppatori</h1>
 
-    <form id="search" @submit.prevent="" action="">
+    <form id="search" @submit.prevent="" action="" class="">
 
       <div class="skills">
         <label>Ricerca per specializzazione</label>
@@ -102,7 +102,9 @@ export default{
 
     </form>
 
-    <span>Risultati per ricerca: {{ this.store.skillName }}</span>
+    <div id="search-results">
+      <span >Risultati per ricerca: {{ this.store.skillName }}</span>
+    </div>
     
 
     <div v-if="this.isDeveloperFound" class="container all-developers">
@@ -175,4 +177,44 @@ export default{
     from {-webkit-transform: rotate(0deg);}
     to {-webkit-transform: rotate(720deg);}
   }
+
+
+
+  @media only screen and (max-width: 576px) {
+    .container {
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+      }
+    }
+    #search {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+    }
+
+    #search-results {
+      display: flex;
+      justify-content: center;
+    }
+
+    .all-developers {
+      display: flex;
+      justify-content: center;
+
+      padding-top: 50px;
+    }
+   }
+
+
+
+
+
+
+
+
+
+
+
+
 </style>
