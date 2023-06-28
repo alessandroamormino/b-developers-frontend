@@ -14,7 +14,7 @@ export default {
             <div id="section-container">
                 <div class="single-category">
                     <img src="img/graphics.png" alt="category-icon">
-                    <span>Graphics & Design</span>
+                    <span>Grafica & Design</span>
                 </div>
                 <div class="single-category">
                     <img src="img/digital_mark.png" alt="category-icon">
@@ -22,11 +22,11 @@ export default {
                 </div>
                 <div class="single-category">
                     <img src="img/writing.png" alt="category-icon">
-                    <span>Scrivere e tradurre</span>
+                    <span>Scrittura & Traduzione</span>
                 </div>
                 <div class="single-category">
                     <img src="img/video.png" alt="category-icon">
-                    <span>Video & Animation</span>
+                    <span>Video & Animazione</span>
                 </div>
                 <div class="single-category">
                     <img src="img/music.png" alt="category-icon">
