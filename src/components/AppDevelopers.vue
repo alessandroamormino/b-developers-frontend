@@ -13,7 +13,9 @@ export default{
       halfStars: '',
       remainingStars: '',
       isSponsored: false,
-      length_object: ''
+      length_object: '',
+      slidingIcons: false,
+
     }
   }, 
   props: {
@@ -28,14 +30,37 @@ export default{
 
     getSkillsIcons(){
       this.icons = [];
+      let index = 0;
 
-    for (let i = 0; i < this.developers.skills.length; i++) {
-      this.icons.push(this.developers.skills[i].icon);
+      if(this.developers.skills.length > 6){
+
+        
+        do{
+          if(index >= this.developers.skills.length){
+            index = 0;
+          }
+          
+          this.icons.push(this.developers.skills[index].icon)
+          index ++;
+          
+        }while(this.icons.length < 20);
+
+        this.slidingIcons = true;
+
+        return this.icons;
+
+      }else{
+
+        for (let i = 0; i < this.developers.skills.length; i++) {
+          this.icons.push(this.developers.skills[i].icon)
+          
+        }
+
+        return this.icons
+      }
+        
       
-
     }
-    return this.icons;
-  }
 
   }, 
 
@@ -69,7 +94,16 @@ export default{
       } else {
         this.isSponsored = false;
       }
-    }
+    },
+
+    truncateTexts(services){
+
+      if(services){
+ 
+        return services.substr(0, 30 ) + '\u2026';
+      }
+
+    },
 
   },
   
@@ -116,15 +150,21 @@ export default{
       <hr>
 
       <div class="card-text px-3 flex-grow-1">
-        <div class="services mt-1"><strong>Prestazioni: </strong>{{developers.services}}</div>
+        <div class="services mt-1"><strong>Prestazioni: </strong>{{ this.truncateTexts(developers.services) }}</div>
       </div>
 
       <hr>
 
-      <div class="icons">
-        <img class="skill-icon" v-for="icon in getSkillsIcons" :src="this.store.URI + 'storage/' + icon" alt="">
-      </div>
+      <div class="logos">
 
+        <div :class="this.slidingIcons ? 'icons' : 'static-icons'">
+          <img class="skill-icon" v-for="icon in getSkillsIcons" :src="this.store.URI + 'storage/' + icon" alt="">
+        </div>
+        <div v-if="this.slidingIcons" class="icons">
+          <img class="skill-icon" v-for="icon in getSkillsIcons" :src="this.store.URI + 'storage/' + icon" alt="">
+        </div>
+
+      </div>
     </div>
     
   </router-link>
@@ -138,13 +178,21 @@ export default{
   text-decoration: none;
   font-family: 'Montserrat', sans-serif;
 
-
   overflow: hidden;
 
 
   &.sponsored{
     border: 2px solid #146ebe;
     background-color: #146fbe38;
+  }
+
+  &:hover .icons{
+    animation: slide 15s linear infinite;
+  }
+  @keyframes slide {
+    from{transform: translateX(0%);}
+    to{transform: translateX(-100%);}
+
   }
 
   hr{
@@ -158,7 +206,7 @@ export default{
 
     #profile-pic{
       width: 100%;
-      height: 200px;
+      height: 180px;
       object-fit: cover;
       object-position: top;
       
@@ -187,24 +235,37 @@ export default{
     padding: 10px 0;
   }
   
-  .icons{
+  .logos{
+    display: flex;
+
+    margin: 0 20px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    
+  }
+
+  .static-icons{
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
     gap: 10px;
+    padding: 5px;
+  }
 
-    min-height: 100px;
-    width: 80%;
-    margin: 10px auto;
+  .icons{
+    display: flex;
+    gap: 10px;
+    padding: 5px;
 
+  }
 
-    .skill-icon{
-      width: 30px;
-      height: 30px;
-      object-fit: contain;
+  .skill-icon{
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
 
-    }
   }
 
   .stars {
