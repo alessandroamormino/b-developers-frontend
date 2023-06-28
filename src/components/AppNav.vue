@@ -17,7 +17,7 @@ export default {
         <img src="img/logo.png" alt="logo">
       </router-link>    
       <div class="nav-links">
-        <a href="http://127.0.0.1:8000/" class="btn btn-outline-light nav-btn">Area Riservata</a>
+        <a href="http://127.0.0.1:8000/admin" class="btn btn-outline-light nav-btn">Area Riservata</a>
       </div>
     </div>
   </nav>
