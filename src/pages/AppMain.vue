@@ -103,15 +103,14 @@ export default{
     </div>
   </div>
 
-  <div class="container my-4">
-    <h1>Sviluppatori</h1>    
+  <div class="container my-4">    
 
     <div v-if="this.isDeveloperFound" class="container all-developers">
       <button @click="topFunction()" id="myBtn">&ShortUpArrow;</button>
-      <h2 class="w-100">In evidenza</h2>
+      <h2 class="w-100 pt-4">Sviluppatori in evidenza</h2>
       <AppSponsor v-for="developer in this.sponsoredDevelopers" :developers="developer"></AppSponsor>
 
-      <h2 class="w-100">Altri sviluppatori</h2>
+      <h2 class="w-100 pt-4">Altri sviluppatori</h2>
       <AppDevelopers v-for="developer in this.developers" :developers="developer"></AppDevelopers>
     </div>
     <div v-else class="alert alert-warning">
