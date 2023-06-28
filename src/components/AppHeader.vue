@@ -10,8 +10,11 @@ export default {
         return {
           jumboImage: [
             "public/img/jumbo1.jpeg",
-            "public/img/jumbo2.jpeg",
-            "public/img/jumbo3.jpeg",
+            "public/img/jumbo2.webp",
+            "public/img/jumbo3.webp",
+            "public/img/jumbo4.webp",
+            "public/img/jumbo5.jpg",
+            "public/img/jumbo6.webp",
         ],
           store,
           mainIndex: 0,
@@ -62,17 +65,12 @@ export default {
 
 
   <div id="jumbo-content">
-    <h1 data-aos="fade-right" data-aos-duration="1700">Professionisti del settore</h1>
+    <h1 data-aos="fade-right" data-aos-duration="1700">Professionisti del settore Tech</h1>
   
     <form id="search" @submit.prevent="" action="">
-        <!-- <label for="skillInput" class="form-label">Ricerca per specializzazione</label>
-        <input v-model="this.selectedSkill" class="form-control" list="skillList" id="skillInput" @change="getDevelopers()" placeholder="Nome Specializzazione...">
-        <datalist id="skillList">
-          <option value="">Tutte</option>
-          <option v-for="skill in this.skills " :value="skill.name">{{ skill.name }}</option>
-        </datalist> -->
-  
-        <label id="spec-title">Specializzazioni</label>
+        <label id="spec-title">Ricerca</label>
+        <i class="fa-solid fa-arrow-right"></i>
+
         <select v-model="this.store.selectedSkill" id="skill_id" name="skill_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
           <option selected value="">Tutte le specializzazioni</option>
           <option v-for="skill in this.skills" :value="skill.id">{{ skill.name }}</option>
@@ -96,7 +94,7 @@ export default {
   #jumbo {
     position: relative;
     width: 100%;
-    height: 700px;
+    height: 800px;
         
     #jumbo-carousel {
       width: 100%;
@@ -110,13 +108,14 @@ export default {
 
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.205);
+        // background-color: rgba(0, 0, 0,);
       }
 
       .jumbo-images {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        // object-position: 0 10px;
       }
       
     }
@@ -127,7 +126,7 @@ export default {
         min-width: 800px;
         position: absolute;
         top: 60%;
-        left: 30%;
+        left: 35%;
         transform: translate(-50%, -50%);
 
         h1 {
@@ -138,22 +137,34 @@ export default {
         #search{
           display: flex;
           align-items: center;
+          // flex
           width: 100%;
           height: 100px;
           padding: 2em 0;
 
           #spec-title {
-            font-size: 2em;
-            margin-right: 30px;
+            font-size: 1.5em;
+            // margin-right: 30px;
             color: white;
           }
 
+          i{
+            color: #fff;
+            font-size: 1.5em;
+            padding: 0 20px;
+          }
+
           select {
-            background-color: #4ba4f1d3;
+            // background-color: #4ba4f1d3;
             padding: 5px;
-            color: white;
+            color: #000;
             font-size: 1.1em;
             border: none;
+
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+
+            height: 100%;
 
             &:hover {
               cursor: pointer;
@@ -165,9 +176,12 @@ export default {
             justify-content: center;
             align-items: center;
 
-            width: 70px;
-            height: 50px;
-            margin-left: 10px;
+            width: 50px;
+            height: 100%;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+
+
           }
 
           .form-label{
