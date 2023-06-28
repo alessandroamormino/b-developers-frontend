@@ -68,17 +68,17 @@ export default {
     <h1 data-aos="fade-right" data-aos-duration="1700">Professionisti del settore Tech</h1>
   
     <form id="search" @submit.prevent="" action="">
-        <label id="spec-title">Ricerca</label>
-        <i class="fa-solid fa-arrow-right"></i>
+      <label id="spec-title">Ricerca</label>
+      <i class="fa-solid fa-arrow-right"></i>
 
-        <select v-model="this.store.selectedSkill" id="skill_id" name="skill_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
-          <option selected value="">Tutte le specializzazioni</option>
-          <option v-for="skill in this.skills" :value="skill.id">{{ skill.name }}</option>
-        </select>
-        
-        <router-link :to="{name:'search' }" type="submit" class="btn btn-primary" @click="this.getSkillName()"><i class="fa-solid fa-magnifying-glass"></i></router-link>
+      <select v-model="this.store.selectedSkill" id="skill_id" name="skill_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
+        <option selected value="">Tutte le specializzazioni</option>
+        <option v-for="skill in this.skills" :value="skill.id">{{ skill.name }}</option>
+      </select>
+      
+      <router-link :to="{name:'search' }" type="submit" class="btn btn-primary" @click="this.getSkillName()"><i class="fa-solid fa-magnifying-glass"></i></router-link>
   
-      </form>
+    </form>
 
   </div>
 
@@ -193,7 +193,62 @@ export default {
         }
       }
 
-
-
   }
+
+
+  @media screen and (max-width: 1200px) {
+      #jumbo{
+
+        #jumbo-content{
+          min-width: 600px;
+        }
+      }
+  }
+
+  @media screen and (max-width: 992px) {
+      #jumbo{
+
+        #jumbo-content{
+          min-width: 500px;
+        }
+      }
+  }
+
+  @media screen and (max-width: 768px) {
+      #jumbo{
+
+        #jumbo-content{
+          min-width: 500px;
+          left: 50%;
+        }
+      }
+  }
+
+  @media screen and (max-width: 576px) {
+      #jumbo{
+
+        #jumbo-content{
+          min-width: 200px;
+          left: 50%;
+
+          h1{
+            font-size: 3em;
+          }
+
+          #search{
+            
+            label{
+              display: none;
+            }
+            
+            i.fa-arrow-right{
+              display: none;
+            }
+
+          }
+        }
+      }
+  }
+
+
 </style>
