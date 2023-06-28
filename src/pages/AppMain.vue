@@ -86,7 +86,7 @@ export default{
 
   <div id="companies">
     <div class="container">
-      <ul>
+      <ul class="p-0">
         <li>
           <img class="company" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1280px-Google_2015_logo.svg.png" alt="google">
         </li>
@@ -105,12 +105,12 @@ export default{
 
   <div class="container my-4">    
 
-    <div v-if="this.isDeveloperFound" class="container all-developers">
+    <div v-if="this.isDeveloperFound" class="container all-developers d-flex justify-content-center">
       <button @click="topFunction()" id="myBtn">&ShortUpArrow;</button>
-      <h2 class="w-100 pt-4">Sviluppatori in evidenza</h2>
+      <h2 class="w-100 pt-4 text-center">Sviluppatori in evidenza</h2>
       <AppSponsor v-for="developer in this.sponsoredDevelopers" :developers="developer"></AppSponsor>
 
-      <h2 class="w-100 pt-4">Altri sviluppatori</h2>
+      <h2 class="w-100 pt-4 text-center">Altri sviluppatori</h2>
       <AppDevelopers v-for="developer in this.developers" :developers="developer"></AppDevelopers>
     </div>
     <div v-else class="alert alert-warning">
@@ -128,11 +128,11 @@ export default{
 #myBtn {
   display: none;
   position: fixed;
-  bottom: 40px;
-  right: 30px;
+  bottom: 30px;
+  right: 20px;
 
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
 
   z-index: 2;
@@ -214,5 +214,13 @@ export default{
   @-webkit-keyframes loading {
     from {-webkit-transform: rotate(0deg);}
     to {-webkit-transform: rotate(720deg);}
+  }
+
+
+  @media screen and (max-width: 768){
+
+    
+    
+       
   }
 </style>
