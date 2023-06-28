@@ -41,6 +41,9 @@ export default{
 
         reviewSent: false,
         reviewFailed: false,
+
+        isNotFlipped: false,
+
       };
 
   },
@@ -194,6 +197,10 @@ export default{
       this.reviewSent = false;
       this.reviewFailed = false;
       this.isMessageVisible = false;
+    },
+
+    showCV() {
+      this.isNotFlipped = !this.isNotFlipped;
     }
 
 
@@ -255,46 +262,58 @@ export default{
                     </div>
                   </div>
                 </div>
-                <div class="card-body text-black">
-                  <div class="mb-2 w-100">
-                    <div class="p-2" style="background-color: #f8f9fa;">
-                      <p class="box-title">Informazioni</p>
-                      <p><strong>Indirizzo:</strong> {{ this.developer.address }}</p>
-                      <p><strong>Telefono:</strong> {{ this.developer.phone }}</p>
-                      <p><strong>Titolo:</strong> {{ this.developer.role }}</p>
-                      <p><strong>Prestazioni:</strong> {{ this.developer.services }}</p>
-                    </div>
-                  </div>
 
-                  <div class="mb-2 w-100">
-                    <div class="p-2" style="background-color: #f8f9fa;">
-                      <div class="icons d-flex align-items-center">
-                        <p class="box-title">Specializzazioni</p>
-                        <img class="skill-icon" v-for="icon in getSkillsIcons" :src="this.store.URI + 'storage/' + icon" alt="">
-                    </div>
-                  </div>
-
-                  <div class="mt-2 w-100">
-                    <div class="p-2" style="background-color: #f8f9fa;">
-                      <div class="icons d-flex align-items-center h-100">
-                        <p class="box-title">Curriculum</p>
-                        <img id="dev-curriculum" :src="getDevCV" alt="developer-cv">
+                <div id="card-inner" :class="this.isNotFlipped ? 'flip' : ''">
+                  <div class="card-body text-black">
+  
+                    <div class="mb-2 w-100">
+                      <div class="p-2" style="background-color: #f8f9fa;">
+                        <p class="box-title">Informazioni</p>
+                        <p><strong>Indirizzo:</strong> {{ this.developer.address }}</p>
+                        <p><strong>Telefono:</strong> {{ this.developer.phone }}</p>
+                        <p><strong>Titolo:</strong> {{ this.developer.role }}</p>
+                        <p><strong>Prestazioni:</strong> {{ this.developer.services }}</p>
                       </div>
                     </div>
+  
+                    <div class="mb-2 w-100">
+                      <div class="p-2" style="background-color: #f8f9fa;">
+                        <div class="icons d-flex align-items-center">
+                          <p class="box-title">Specializzazioni</p>
+                          <img class="skill-icon" v-for="icon in getSkillsIcons" :src="this.store.URI + 'storage/' + icon" alt="">
+                      </div>
+                    </div>
+  
+                    <div class="mt-2 w-100">
+                      <div class="p-2" style="background-color: #f8f9fa;">
+                        <div class="icons d-flex align-items-center h-100">
+                          <p class="box-title">Curriculum</p>
+                          <a @click="showCV()" id="cv-link" href="#">Visualizza</a>
+                        </div>
+                      </div>
+                    </div>
+  
+                    </div>
+                
                   </div>
 
+                  <div id="cv-container" class="d-flex flex-column">
+                    <img id="dev-curriculum" :src="getDevCV" alt="developer-cv">
+                    <button @click="showCV()" class="btn btn primary">Torna ai dettagli</button>
                   </div>
-              
                 </div>
+
               </div>
             </div>
           </div>
         </div>
+
       </section>
 
       <div v-else class="alert alert-warning">
           <p>Lo sviluppatore non è stato trovato</p>
       </div>
+
       <hr>
 
       <div class="form-section py-5">
@@ -399,9 +418,11 @@ export default{
   padding-top: 60px;
   width: 100%;
   gap: 20px;
+  
   .card-section {
-    max-height: 800px;
     width: 80%;
+    height: auto;
+
     .developer-card {
       width: 100%;
       
@@ -410,14 +431,52 @@ export default{
           height: 180px;
           object-fit: cover;
           margin-top: 30px;
+          margin-left: 30px;
 
-          z-index: 1;
 
       }
       .box-title {
         font-size: 1.2em;
         margin-bottom: 0;
       }
+
+      .card {
+        perspective: 2000px;
+
+        #card-inner {
+          padding-top: 10px;
+          position: relative;
+          width: 100%;
+          height: 100%;
+          transition: transform 0.8s;
+          
+          &.flip {
+            transform-style: preserve-3d;
+            transform: rotateY(-180deg);
+          }
+
+          .card-body {
+            padding: 0;
+          }
+          
+          .card-body, #cv-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+          }
+
+          #cv-container {
+            transform: rotateY(180deg);
+
+            #dev-curriculum {
+              width: 300px
+            }
+          }
+        }
+
+      }
+
     }
   }
   
@@ -435,11 +494,15 @@ export default{
     }
 }
 
+  #cv-link {
+    text-decoration: none;
+    color: #146ebe;
+  }
 
-#dev-curriculum {
-  width: 350px;
-  display: block;
-}
+
+
+
+
   .icons{
     display: flex;
     align-items: center;
