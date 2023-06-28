@@ -139,8 +139,8 @@ export default {
           align-items: center;
           // flex
           width: 100%;
-          height: 100px;
-          padding: 2em 0;
+          height: 2.5em;
+          // padding: 2em 0;
 
           #spec-title {
             font-size: 1.5em;
@@ -165,6 +165,7 @@ export default {
             border-bottom-right-radius: 0;
 
             height: 100%;
+            // height: 3em;
 
             &:hover {
               cursor: pointer;
