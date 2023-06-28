@@ -52,7 +52,9 @@ export default{
 
         this.store.skillName =  this.skills[i].name;        
       }
+
     }
+    console.log(this.store.skillName);
 
   },
 

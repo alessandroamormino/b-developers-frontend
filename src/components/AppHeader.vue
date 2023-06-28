@@ -16,6 +16,21 @@ export default {
       skills: Object,
     },
 
+    methods: {
+      getSkillName() {
+      for (let i = 0; i < this.skills.length; i++) {
+
+        if (this.skills[i].id == this.store.selectedSkill) {
+
+          this.store.skillName = this.skills[i].name;
+        }
+
+      }
+      console.log(this.store.skillName);
+
+      },
+    },
+
     mounted() {
       AOS.init();
     }

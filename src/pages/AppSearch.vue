@@ -84,11 +84,15 @@ export default{
   },
 
   getSkillName(){
-    for (let i = 0; i < this.skills.length; i++) {
-
-        if(this.skills[i].id == this.store.selectedSkill){
-            this.store.skillName = this.skills[i].name;        
-        }
+    if(this.store.selectedSkill == '') {
+      this.store.skillName = 'Tutte le specializzazioni';
+    } else {
+      for (let i = 0; i < this.skills.length; i++) {
+  
+          if(this.skills[i].id == this.store.selectedSkill){
+              this.store.skillName = this.skills[i].name;        
+          }
+      }
     }
 
 
@@ -97,6 +101,7 @@ export default{
   }, 
   created(){
     this.getDevelopers();
+    this.getSkillName();
   }, 
 }
 </script>
@@ -136,8 +141,8 @@ export default{
 
     </form>
 
-    <span v-if="this.store.selectedSkill != ''">Risultati per ricerca: {{ this.store.skillName }}</span>
-    <span v-else>Risultati per: Tutte le specializzazioni</span>
+    <!-- <span v-if="this.store.selectedSkill == ''">Risultati per: Tutte le specializzazioni</span> -->
+    <span>Risultati per ricerca: {{ this.store.skillName }}</span>
     
 
     <div v-if="this.isDeveloperFound" class="container all-developers">
