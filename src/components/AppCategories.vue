@@ -9,47 +9,47 @@ export default {
 </script>
 <template>
     <section>
-        <div class="container p-4 pb-0 mt-5">
-            <h3 id="section-title">Lo cerchi, lo abbiamo.</h3>
+        <div class="container p-4 pb-0 mt-5" >
+            <h3 id="section-title">Lo cerchi, lo abbiamo</h3>
             <div id="section-container">
                 <div class="single-category">
-                    <img src="img/graphics.png" alt="category-icon">
-                    <span>Grafica & Design</span>
+                    <img src="public/img/graphics.png" alt="category-icon">
+                    <span>Graphics & Design</span>
                 </div>
                 <div class="single-category">
-                    <img src="img/digital_mark.png" alt="category-icon">
+                    <img src="public/img/digital_mark.png" alt="category-icon">
                     <span>Marketing Digitale</span>
                 </div>
                 <div class="single-category">
-                    <img src="img/writing.png" alt="category-icon">
-                    <span>Scrittura & Traduzione</span>
+                    <img src="public/img/writing.png" alt="category-icon">
+                    <span>Scrivere e tradurre</span>
                 </div>
                 <div class="single-category">
-                    <img src="img/video.png" alt="category-icon">
-                    <span>Video & Animazione</span>
+                    <img src="public/img/video.png" alt="category-icon">
+                    <span>Video & Animation</span>
                 </div>
                 <div class="single-category">
-                    <img src="img/music.png" alt="category-icon">
+                    <img src="public/img/music.png" alt="category-icon">
                     <span>Musica & Audio</span>
                 </div>
                 <div class="single-category">
-                    <img src="img/programming.png" alt="category-icon">
+                    <img src="public/img/programming.png" alt="category-icon">
                     <span>Programmazione & Tech</span>
                 </div>
                 <div class="single-category">
-                    <img src="img/business.png" alt="category-icon">
+                    <img src="public/img/business.png" alt="category-icon">
                     <span>Business</span>
                 </div>
                 <div class="single-category">
-                    <img src="img/lifestyle.png" alt="category-icon">
+                    <img src="public/img/lifestyle.png" alt="category-icon">
                     <span>Lifestyle</span>
                 </div>
                 <div class="single-category">
-                    <img src="img/data.png" alt="category-icon">
+                    <img src="public/img/data.png" alt="category-icon">
                     <span>Informazioni & Data</span>
                 </div>
                 <div class="single-category">
-                    <img src="img/fotografia.png" alt="category-icon">
+                    <img src="public/img/fotografia.png" alt="category-icon">
                     <span>Fotografia</span>
                 </div>
 
@@ -59,14 +59,14 @@ export default {
 </template>
 <style lang="scss" scoped>
 section {
-    margin: 0 auto 80px;
+    margin: 80px auto;
     font-family: 'Montserrat', sans-serif;
 
 
     #section-title {
         color: rgb(20, 110, 190);
-        font-size: 2.5rem;
-        letter-spacing: 2px;
+        font-size: 2.2rem;
+        font-weight: bold;
     }
 
     #section-container {
