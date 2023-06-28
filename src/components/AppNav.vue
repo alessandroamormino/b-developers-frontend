@@ -14,7 +14,7 @@ export default {
   <nav class="navbar navbar-expand-lg">
     <div class="container nav-container">
       <router-link :to="{name: 'main'}" class="nav-logo" aria-current="page">
-        <img src="img/bdevelopers-high-resolution-color-logo (1).png" alt="">
+        <img src="img/bdevelopers-logo.png" alt="">
       </router-link>    
       <div class="nav-links">
         <a href="http://127.0.0.1:8000/" class="btn btn-outline-light nav-btn">Crea il tuo profilo</a>
