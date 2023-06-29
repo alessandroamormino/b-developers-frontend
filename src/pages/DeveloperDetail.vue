@@ -455,6 +455,7 @@ export default{
     height: 700px;
     object-fit: cover;
     border-radius: 5px;
+    border: 1px solid lightgray;
   }
 }
 
