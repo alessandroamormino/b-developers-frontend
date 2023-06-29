@@ -2,6 +2,8 @@
 // importo axios
 import axios from 'axios';
 import {store} from '../store.js';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 
 import AppDevelopers from '../components/AppDevelopers.vue';
@@ -82,6 +84,10 @@ export default{
     this.getDevelopers();
     window.onscroll = () => {this.scrollFunction()};
   }, 
+
+  mounted() {
+    AOS.init();
+  }
 }
 </script>
 <template>
@@ -110,11 +116,11 @@ export default{
 
     <button v-if="this.isScrollBtnVisible" @click="topFunction()" id="myBtn">&ShortUpArrow;</button>
     <div v-if="this.isDeveloperFound" class="container all-developers d-flex justify-content-center">
-      <h2 class="w-100 pt-4 text-center">Sviluppatori in evidenza</h2>
-      <AppSponsor v-for="developer in this.sponsoredDevelopers" :developers="developer"></AppSponsor>
+      <h2 class="w-100 pt-4 text-center" >Sviluppatori in evidenza</h2>
+      <AppSponsor data-aos="fade-left" data-aos-duration="800" v-for="developer in this.sponsoredDevelopers" :developers="developer"></AppSponsor>
 
       <h2 class="w-100 pt-4 text-center">Altri sviluppatori</h2>
-      <AppDevelopers v-for="developer in this.developers" :developers="developer"></AppDevelopers>
+      <AppDevelopers  data-aos="fade-right" data-aos-duration="800" v-for="developer in this.developers" :developers="developer"></AppDevelopers>
     </div>
     <div v-else class="alert alert-warning">
       Non ci sono sviluppatori con questa specializzazione
@@ -124,7 +130,7 @@ export default{
   <div class="loader" v-if="loaderVisible"></div>
 
   <AppSection></AppSection>
-  <AppCategories></AppCategories>
+  <AppCategories data-aos="fade-in" data-aos-duration="2000"></AppCategories>
 </template>
 <style lang="scss" scoped>
 
