@@ -15,8 +15,11 @@ export default {
     <div class="container nav-container">
       <router-link :to="{name: 'main'}" class="nav-logo" aria-current="page">
         <img src="/public/img/logo.png" alt="logo">
-      </router-link>    
-      <div class="nav-links">
+      </router-link> 
+      <div class="nav-links d-flex align-items-center gap-4">
+        <router-link :to="{name: 'about'}" class="about" aria-current="page">
+          Chi Siamo
+        </router-link>       
         <a href="http://127.0.0.1:8000/admin" class="btn btn-outline-light nav-btn">Area Riservata</a>
       </div>
     </div>
@@ -52,13 +55,17 @@ nav {
   
     .nav-links {
       padding: 0 20px;
-      
+    
       a {
         color: white;
         text-decoration: none;
 
-        &:hover {
-          color: rgb(20, 110, 190);
+        &.about:hover {
+          text-decoration: underline;
+        }
+
+        &.nav-btn:hover {
+          color: #166DBE;
         }
       }
     }
