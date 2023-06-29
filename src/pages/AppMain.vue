@@ -21,7 +21,7 @@ export default{
         isDeveloperFound: false,
         store,
         loaderVisible: false,
-
+        isScrollBtnVisible: false,
       };
   },
   components: { AppDevelopers, AppHeader, AppSponsor, AppCategories, AppSection }, 
@@ -60,12 +60,15 @@ export default{
   },
 
   scrollFunction() {
-    let mybutton = document.querySelector("#myBtn");
+    // let mybutton = document.querySelector("#myBtn");
 
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        mybutton.style.display = "block";
+        // mybutton.style.display = "block";
+        this.isScrollBtnVisible = true;
     } else {
-        mybutton.style.display = "none";
+        // mybutton.style.display = "none";
+        this.isScrollBtnVisible = false;
+
     }
   },
 
@@ -105,8 +108,8 @@ export default{
 
   <div class="container my-4">    
 
+    <button v-if="this.isScrollBtnVisible" @click="topFunction()" id="myBtn">&ShortUpArrow;</button>
     <div v-if="this.isDeveloperFound" class="container all-developers d-flex justify-content-center">
-      <button @click="topFunction()" id="myBtn">&ShortUpArrow;</button>
       <h2 class="w-100 pt-4 text-center">Sviluppatori in evidenza</h2>
       <AppSponsor v-for="developer in this.sponsoredDevelopers" :developers="developer"></AppSponsor>
 
@@ -126,7 +129,7 @@ export default{
 <style lang="scss" scoped>
 
 #myBtn {
-  display: none;
+  // display: none;
   position: fixed;
   bottom: 30px;
   right: 20px;
