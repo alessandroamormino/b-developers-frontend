@@ -215,7 +215,7 @@ export default {
         #jumbo-carousel{
           .jumbo-images{
             object-fit: cover;
-            object-position: right;
+            object-position: 85%;
           }
         }
       }
