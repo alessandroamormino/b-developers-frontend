@@ -21,6 +21,7 @@ export default {
           Chi Siamo
         </router-link>       
         <a href="http://127.0.0.1:8000/admin" class="btn btn-outline-light nav-btn">Area Riservata</a>
+        <a href="http://127.0.0.1:8000/admin"><i id="user-icon" class="fa-solid fa-circle-user"></i></a>
       </div>
     </div>
   </nav>
@@ -68,12 +69,35 @@ nav {
           color: #166DBE;
         }
       }
+
+      #user-icon {
+        font-size: 2em;
+        display: none;
+      }
     }
   }
 
 }
 
 
+
+@media only screen and (max-width: 576px) {
+
+  nav {
+    .nav-container {
+      
+      .nav-links {
+        #user-icon {
+          display: block;
+        }
+
+        .btn {
+            display:none;
+          }
+      }
+    }
+  }
+}
 
 
 </style>
