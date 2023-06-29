@@ -124,7 +124,7 @@ section {
     }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 992px) {
     section{
 
         #section-container{
@@ -132,9 +132,6 @@ section {
                 width: calc(100% / 2);
                 margin: 40px auto 20px;
 
-                img{
-                    width: 15%;
-                }
             }
         }
     }
@@ -146,13 +143,15 @@ section {
     section{
 
         #section-container{
-            flex-flow: column;
+            flex-flow: row wrap;
             justify-content: center;
             align-items: center;
             .single-category{
-
+                width: calc(100% / 2);
+                margin-bottom: 10px;
+                
                 img{
-                    width: 30%;
+                    width: 15%;
                 }
             }
         }

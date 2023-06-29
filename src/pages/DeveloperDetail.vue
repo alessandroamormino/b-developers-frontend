@@ -174,7 +174,7 @@ export default{
     }, 
 
     showMessageBox(){
-      this.isMessageVisible = !this.isMessageVisible;         
+      this.isMessageVisible = !this.isMessageVisible;
     },
 
     closeMessage() {
@@ -213,7 +213,8 @@ export default{
             this.icons.push(this.developer.skills[i].icon);
         }
         return this.icons;
-    } ,
+    },
+
 
 
   }
@@ -221,7 +222,9 @@ export default{
 };
 </script>
 <template>
-  <div class=" big-container container d-flex my-5">
+  <div id="overlay" :class="this.isMessageVisible ? 'display' : ''" @click="this.isMessageVisible ? closeMessage() : ''">
+  </div>
+  <div class="big-container container d-flex my-5">
 
       <section class="card-section gradient-custom-2" v-if="this.isDeveloperFound">
         <div class="container py-5 h-100">
@@ -229,13 +232,13 @@ export default{
             <div class="col col-lg-9 col-xl-7 w-100 h-100">
 
               <div class="card w-100 h-100">
-                <div class="rounded-top text-white d-flex flex-row" style="background-color: #146ebe; height:200px;">
-                  <div class="profile-image d-flex p-2 flex-grow-1">
+                <div class="rounded-top text-white d-flex flex-row justify-content-between" style="background-color: #146ebe; height:200px;">
+                  <div class="profile-image d-flex p-2">
                     <img id="dev-picture" :src="getDevPicture" alt="Generic placeholder image" class="img-fluid img-thumbnail ">
                   </div>
-                  <div id="user-header" class="d-flex flex-column gap-3 align-items-center justify-content-center h-100 w-25">
-                    <div class="d-flex flex-column align-items-center">
-                      <h3>{{ this.developer.user.name }} {{ this.developer.last_name }}</h3>
+                  <div id="user-header" style="padding-right: 15px;" class="d-flex flex-grow-1 flex-column gap-3 align-items-end justify-content-center h-100 w-25">
+                    <div class="d-flex flex-column align-items-end">
+                      <h3 style="text-align: end;">{{ this.developer.user.name }} {{ this.developer.last_name }}</h3>
                       <div v-if="this.developer.ratings.length > 0" class="stars h-100">
                         <i v-for="star in this.getFullStars(this.ratingAVG)" class="fa-solid fa-star"></i><i v-for="halfStar in this.getHalfStars(this.ratingAVG)" class="fa-solid fa-star-half-stroke"></i><i v-for="star in this.getRemainingStars(this.ratingAVG)" class="fa-regular fa-star "></i> 
                       </div>
@@ -327,7 +330,10 @@ export default{
     </div>
 
     <div class="card p-3 message-form-container" :class="this.isMessageVisible ? 'show' : 'hide'">
-      <h5>Lascia un messaggio a <span>{{this.completeName}}</span></h5>
+      <div class="d-flex justify-content-between">
+        <h5>Lascia un messaggio a <span>{{this.completeName}}</span></h5>
+        <button type="button" class="btn-close" aria-label="Chiudi" @click="closeMessage()"></button>
+      </div>
       <form @submit.prevent="sendMessage()" method="POST">
         <!-- name 	email 	subject 	meeting_date 	content -->
         <div class="mb-3 info-user">
@@ -377,7 +383,26 @@ export default{
 </template>
 
 
+
+
 <style lang="scss" scoped>
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+
+  &.display {
+    display: block
+  }
+}
+
+
+
+
 .big-container {
   padding-top: 60px;
   width: 100%;
@@ -526,17 +551,23 @@ export default{
   }
   .message-form-container{
     position: fixed;
-    right: 2em;
-    bottom: 9em;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    transform: translate(-50%, -50%);
     width: 500px;
+
     &.hide{
       display: none;
     }
+
     &.show{
       display: block;
     }
-    h5{
-      span{
+
+    h5 {
+
+      span {
         text-transform: capitalize;
       }
     }
@@ -547,6 +578,7 @@ export default{
 
   .loader {
    position: fixed;
+   z-index: 3;
    top: 50%;
    right: 49%;
    transform: translateX(-50%);
@@ -578,6 +610,7 @@ export default{
     align-items: center;
     gap: 15px;
     position: fixed;
+    z-index: 3;
     top: 50%;
     left: 50%;
     transform: translate(-50%);
@@ -601,10 +634,34 @@ export default{
 // *******************************************
 //                  RESPONSIVE
 // *******************************************
-@media only screen and (max-width: 576px){
+@media only screen and (max-width: 576px) {
+  .message-form-container {
+    width: 300px;
+  }
+  .big-container {
+    max-width: 450px;
+    margin: auto;
+
+    #cv-container #dev-curriculum {
+      width: 100%;
+      padding: 0 10px;
+    }
+  }
+}
+
+
+
+
+@media only screen and (max-width: 992px){
   .big-container{
+    
     flex-flow: column;
     gap: 0;
+
+    .form-section #cv-container {
+      display: flex;
+      justify-content: center;
+    }
     .card-section{
       width: 100%;
       .container{

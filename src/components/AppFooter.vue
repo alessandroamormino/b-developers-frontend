@@ -21,7 +21,8 @@ export default {
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                   <!-- Content -->
                   <h6 class="text-uppercase fw-bold mb-4">
-                    <img src="img/bdevelopers-website-favicon-black.png" alt=""> <span>BDevelopers</span>
+                    <img src="/public/img/bdevelopers-black.png" alt="">
+                     <span>BDevelopers</span>
                   </h6>
                   
                   <p>
@@ -32,7 +33,7 @@ export default {
                 <!-- Grid column -->
 
                 <!-- Grid column -->
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 servizi">
                   <!-- Links -->
                   <h6 class="text-uppercase fw-bold mb-4">
                     <i class="fa-solid fa-microchip"></i> <span class="footer-lil-title">Servizi</span>
@@ -180,12 +181,13 @@ export default {
 h6 {
   display: flex;
   align-items: center;
+
+  img{
+    width: 22px;
+    margin-right: 5px;
+  }
 }
 
-img{
-  width: 8%;
-  margin-right: 5px;
-}
 
 .footer-lil-title {
   margin-left: 10px;
@@ -207,6 +209,9 @@ img{
 
 
 @media only screen and (max-width: 768px) {
+  .servizi {
+    display: none;
+  }
   h6 {
     justify-content: center;
   }
